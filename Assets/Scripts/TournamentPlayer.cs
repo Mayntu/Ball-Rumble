@@ -1,21 +1,17 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Compilation;
 using UnityEngine;
 
 public class TournamentPlayer {
-    private TeamClient player; 
-    private UdpClient client;
+    private TeamInfo player; 
+    private TeamConnector client;
 
-    public TournamentPlayer(TeamClient player) {
+    public TournamentPlayer(TeamInfo player) {
         this.player = player;
-        this.client = new UdpClient(player.host, player.port);
+        this.client = new TeamConnector(player.host, player.port);
     }
     public void requestActions(UnitInfoCollection units) {
         string data = JsonUtility.ToJson(units);
         //Debug.Log("requestActions(" + data + ")");
-        client.sendRequest(UdpClient.Requests.ACTIONS, data, onActionsReceived);
+        client.sendRequest(TeamConnector.Requests.ACTIONS, data, onActionsReceived);
     }
 
     public string playerName() {

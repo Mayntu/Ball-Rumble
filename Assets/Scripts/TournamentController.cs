@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
 
 public class TournamentController : MonoBehaviour {
     [SerializeField] private uint totalTeams = 2;
-    [SerializeField] private uint unitsInTeam = 1; // 6 � ��������� ������
+    [SerializeField] private uint unitsInTeam = 1; // 6 units should be in release
     [SerializeField] private uint updatesPerRequest = 3;
     private uint updatesCount = 0;
     private TournamentPlayer[] teams = null;
@@ -61,11 +58,11 @@ public class TournamentController : MonoBehaviour {
 
 
     private void createTestPlayers() {
-        for (uint i = 0; i < totalTeams; i++) {
+        for (int i = 0; i < totalTeams; i++) {
             string playerName = (i == 0) ? "RedPlayer" : "BluePlayer";
             string playerHost = "localhost";
-            uint playerPort = 8200 + i;
-            TeamClient client = new(i, playerName, playerHost, playerPort);
+            int playerPort = 8200 + i;
+            TeamInfo client = new(i, playerName, playerHost, playerPort);
             teams[i] = new TournamentPlayer(client);
         }
     }
