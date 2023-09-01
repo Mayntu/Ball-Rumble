@@ -60,8 +60,8 @@ public class TournamentController : MonoBehaviour {
     private void createTestPlayers() {
         for (int i = 0; i < totalTeams; i++) {
             string playerName = (i == 0) ? "RedPlayer" : "BluePlayer";
-            string playerHost = "localhost";
-            int playerPort = 8200 + i;
+            string playerHost = "127.0.0.1";
+            int playerPort = 8201 + i;
             TeamInfo client = new(i, playerName, playerHost, playerPort);
             teams[i] = new TournamentPlayer(client);
         }

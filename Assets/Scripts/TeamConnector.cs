@@ -38,7 +38,9 @@ public class TeamConnector {
         this.port = port;
         state = State.CONNECT;
         udp = new(host, port);
+        udp.Connect(host, port);
         endpoint = new(IPAddress.Any, port);
+        Debug.Log("New Team on " + host + ":" + port.ToString());
     }
 
 
