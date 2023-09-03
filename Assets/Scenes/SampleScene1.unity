@@ -604,6 +604,112 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 163055962}
   m_Mesh: {fileID: 2946434077619793649, guid: 598de77fb5691d644a47050d8309122e, type: 3}
+--- !u!1 &169384725
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 169384726}
+  - component: {fileID: 169384727}
+  m_Layer: 6
+  m_Name: Walls
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &169384726
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169384725}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -37.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 904076306}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &169384727
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169384725}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 142.91, y: 129.76, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &180448415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 180448416}
+  - component: {fileID: 180448417}
+  m_Layer: 6
+  m_Name: Walls
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &180448416
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180448415}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.3, y: 0, z: 36.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 904076306}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &180448417
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180448415}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 142.91, y: 129.76, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &298248949 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8344573416772247475, guid: 598de77fb5691d644a47050d8309122e, type: 3}
@@ -671,7 +777,7 @@ GameObject:
   - component: {fileID: 448967263}
   - component: {fileID: 448967264}
   m_Layer: 6
-  m_Name: Wall (2)
+  m_Name: Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1827,7 +1933,7 @@ GameObject:
   - component: {fileID: 1073562890}
   - component: {fileID: 1073562891}
   m_Layer: 6
-  m_Name: Wall (1)
+  m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2562,8 +2668,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1238873158}
   - component: {fileID: 1238873159}
+  - component: {fileID: 1238873160}
   m_Layer: 6
-  m_Name: Walls
+  m_Name: WallsWithOut1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2599,12 +2706,25 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 142.91, y: 129.76, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1238873160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238873157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dcab5209e62e424e9bf7851d815cfc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ball: {fileID: 1161707491}
 --- !u!1 &1286279158
 GameObject:
   m_ObjectHideFlags: 0
@@ -2993,7 +3113,7 @@ GameObject:
   - component: {fileID: 1426903159}
   - component: {fileID: 1426903160}
   m_Layer: 6
-  m_Name: Wall
+  m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4065,6 +4185,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 598de77fb5691d644a47050d8309122e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 448967263}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 598de77fb5691d644a47050d8309122e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 180448416}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 598de77fb5691d644a47050d8309122e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 169384726}
     - targetCorrespondingSourceObject: {fileID: -3212515261366272305, guid: 598de77fb5691d644a47050d8309122e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1936882847}
@@ -4274,8 +4400,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1935720359}
   - component: {fileID: 1935720360}
+  - component: {fileID: 1935720361}
   m_Layer: 6
-  m_Name: Walls (1)
+  m_Name: WallsWithOut2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4311,12 +4438,25 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 142.91, y: 129.76, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1935720361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935720358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dcab5209e62e424e9bf7851d815cfc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ball: {fileID: 1161707491}
 --- !u!1 &1936882846
 GameObject:
   m_ObjectHideFlags: 0
