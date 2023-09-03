@@ -12,10 +12,10 @@ public class TournamentController : MonoBehaviour {
 
     void Awake() {
         teams = new TournamentPlayer[totalTeams];
-        createTestPlayers();
     }
 
     void Start() {
+        createTestPlayers();
         createObjectsInfo();
     }
 

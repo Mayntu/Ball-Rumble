@@ -66,6 +66,7 @@ public class TeamSpawner : MonoBehaviour
     
     private void SpawnRedTeam(GameObject playerPrefab)
     {
+        playerPrefab.tag = "RedPlayer";
         foreach(Transform spawnPoint in redTeamSpawnPoints)
         {
             Instantiate(playerPrefab, spawnPoint.position, Quaternion.identity);
@@ -73,6 +74,7 @@ public class TeamSpawner : MonoBehaviour
     }
     private void SpawnBlueTeam(GameObject playerPrefab)
     {
+        playerPrefab.tag = "BluePlayer";
         foreach(Transform spawnPoint in blueTeamSpawnPoints)
         {
             Instantiate(playerPrefab, spawnPoint.position, Quaternion.identity);
