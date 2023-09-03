@@ -47,9 +47,11 @@ public class TeamConnector {
     public delegate void ResponseHandler(string data);
     public void sendRequest(Requests type, string data, ResponseHandler responseHandler) {
         void receiver(IAsyncResult ares) {
+            //Debug.Log("UDP receiver called");
             byte[] buffer = udp.EndReceive(ares, ref endpoint);
             if (buffer != null) {
                 string response = Encoding.UTF8.GetString(buffer);
+                //Debug.Log("UDP got message: " + response);
                 responseHandler(response);
             }
         }
@@ -58,7 +60,7 @@ public class TeamConnector {
         }
         data = "{\"" + RequestName(type) + "\": " + data + "}";
         if (send(data)) {
-            Debug.Log("UDP data out: " + data);
+            //Debug.Log("UDP data out: " + data);
             udp.BeginReceive(new AsyncCallback(receiver), null);
         }
     }
