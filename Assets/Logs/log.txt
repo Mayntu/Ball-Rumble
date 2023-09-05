@@ -1,0 +1,56 @@
+05.09.2023 22:06:20: 
+	Red Team Information:
+		Tag: RedPlayer | Team number: 6
+	Blue Team Information:
+		Tag: BluePlayer | Team number: 3
+
+
+05.09.2023 22:06:24: 
+	Red Team Information:
+		Tag: RedPlayer | Team number: 1
+	Blue Team Information:
+		Tag: BluePlayer | Team number: 2
+
+
+05.09.2023 22:06:31: 
+	Red Team Information:
+		Tag: RedPlayer | Team number: 3
+	Blue Team Information:
+		Tag: BluePlayer | Team number: 4
+
+
+05.09.2023 22:08:52: 
+	Red Team Information:
+		Tag: RedPlayer | Team number: 7
+	Blue Team Information:
+		Tag: BluePlayer | Team number: 2
+
+
+05.09.2023 22:08:55: 
+	Red Team Information:
+		Tag: RedPlayer | Team number: 2
+	Blue Team Information:
+		Tag: BluePlayer | Team number: 1
+
+
+05.09.2023 22:08:58: 
+	Red Team Information:
+		Tag: RedPlayer | Team number: 1
+	Blue Team Information:
+		Tag: BluePlayer | Team number: 6
+
+
+05.09.2023 22:09:02: 
+	Red Team Information:
+		Tag: RedPlayer | Team number: 5
+	Blue Team Information:
+		Tag: BluePlayer | Team number: 7
+
+
+05.09.2023 22:09:06: 
+	Red Team Information:
+		Tag: RedPlayer | Team number: 7
+	Blue Team Information:
+		Tag: BluePlayer | Team number: 3
+
+
