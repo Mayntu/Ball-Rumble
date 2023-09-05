@@ -4,95 +4,142 @@ using UnityEngine;
 
 public class TeamSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject redPlayerPrefab, bluePlayerPrefab, lightBluePlayerPrefab, yellowPlayerPrefab, 
-        blackPlayerPrefab, whitePlayerPrefab;
-        
-    private GameObject[] redTeam = null;
-    private GameObject[] blueTeam = null;
+    [SerializeField] private GameObject uniquePlayerPrefab;
 
     [SerializeField] private Transform[] redTeamSpawnPoints;
     [SerializeField] private Transform[] blueTeamSpawnPoints;
 
-    private void Awake()
-    {
-        redTeam = new GameObject[] { redPlayerPrefab, lightBluePlayerPrefab, blackPlayerPrefab };
-        blueTeam = new GameObject[] { bluePlayerPrefab, yellowPlayerPrefab, whitePlayerPrefab };
-    }
+    private List<int> nums = new List<int> {1, 2, 3, 4, 5, 6, 7};
+
     private void Start()
     {
-        switch (Random.Range(0, 3))
-        {
-            case 0:
-                SpawnRedPlayers();
-                break;
-            case 1:
-                SpawnLightBluePlayers();
-                break;
-            case 2:
-                SpawnBlackPlayers();
-                break;
-            default:
-                break;
-        }
+        // от 0 до 8
+        // в зависимости от цифры будет выбераться принадлежность к команде и её цвет
+        // менять тэг, менять флажок цвета, менять сторону
+        // создать массив по типу nums[0, 1, 2, 3, 4, 5, 6, 7, 8]
+        // когда выпадает цифра удалять её из массива, чтобы генерировать другую комманду
 
-        switch (Random.Range(0, 3))
-        {
-            case 0:
-                SpawnBluePlayers();
-                break;
-            case 1:
-                SpawnYellowPlayers();
-                break;
-            case 2:
-                SpawnWhitePlayers();
-                break;
-            default:
-                break;
-        }
+
+        Debug.Log(nums.Count);
+
+        int randomInt = nums[Random.Range(0, nums.Count)];
         
+        Debug.Log(randomInt);
+        
+        if(randomInt == 1)
+        {
+            SpawnRedTeam(uniquePlayerPrefab, randomInt);
+            nums.RemoveAt(nums.IndexOf(randomInt));
+        }
+        else if(randomInt == 2)
+        {
+            SpawnRedTeam(uniquePlayerPrefab, randomInt);
+            nums.RemoveAt(nums.IndexOf(randomInt));
+        }
+        else if(randomInt == 3)
+        {
+            SpawnRedTeam(uniquePlayerPrefab, randomInt);
+            nums.RemoveAt(nums.IndexOf(randomInt));
+        }
+        else if(randomInt == 4)
+        {
+            SpawnRedTeam(uniquePlayerPrefab, randomInt);
+            nums.RemoveAt(nums.IndexOf(randomInt));
+        }
+        else if(randomInt == 5)
+        {
+            SpawnRedTeam(uniquePlayerPrefab, randomInt);
+            nums.RemoveAt(nums.IndexOf(randomInt));
+        }
+        else if(randomInt == 6)
+        {
+            SpawnRedTeam(uniquePlayerPrefab, randomInt);
+            nums.RemoveAt(nums.IndexOf(randomInt));
+        }
+        else if(randomInt == 7)
+        {
+            SpawnRedTeam(uniquePlayerPrefab, randomInt);
+            nums.RemoveAt(nums.IndexOf(randomInt));
+        }
+
+        
+        Debug.Log(nums.Count);
+
+        randomInt = nums[Random.Range(0, nums.Count)];
+                    
+        Debug.Log(randomInt);
+        
+        if(randomInt == 1)
+        {
+            SpawnBlueTeam(uniquePlayerPrefab, randomInt);
+            nums.RemoveAt(nums.IndexOf(randomInt));
+        }
+        else if(randomInt == 2)
+        {
+            SpawnBlueTeam(uniquePlayerPrefab, randomInt);
+            nums.RemoveAt(nums.IndexOf(randomInt));
+        }
+        else if(randomInt == 3)
+        {
+            SpawnBlueTeam(uniquePlayerPrefab, randomInt);
+            nums.RemoveAt(nums.IndexOf(randomInt));
+        }
+        else if(randomInt == 4)
+        {
+            SpawnBlueTeam(uniquePlayerPrefab, randomInt);
+            nums.RemoveAt(nums.IndexOf(randomInt));
+        }
+        else if(randomInt == 5)
+        {
+            SpawnBlueTeam(uniquePlayerPrefab, randomInt);
+            nums.RemoveAt(nums.IndexOf(randomInt));
+        }
+        else if(randomInt == 6)
+        {
+            SpawnBlueTeam(uniquePlayerPrefab, randomInt);
+            nums.RemoveAt(nums.IndexOf(randomInt));
+        }
+        else if(randomInt == 7)
+        {
+            SpawnBlueTeam(uniquePlayerPrefab, randomInt);
+            nums.RemoveAt(nums.IndexOf(randomInt));
+        }
     }
-
-    private void SpawnRedPlayers() { SpawnRedTeam(redPlayerPrefab); }
-
-    private void SpawnBluePlayers() { SpawnBlueTeam(bluePlayerPrefab); }
-
-    private void SpawnLightBluePlayers() { SpawnRedTeam(lightBluePlayerPrefab); }
-
-    private void SpawnYellowPlayers() { SpawnBlueTeam(yellowPlayerPrefab); }
-
-    private void SpawnBlackPlayers() { SpawnRedTeam(blackPlayerPrefab); }
-
-    private void SpawnWhitePlayers() { SpawnBlueTeam(whitePlayerPrefab); }
     
-    private void SpawnRedTeam(GameObject playerPrefab)
+    private void SpawnRedTeam(GameObject playerPrefab, int randomInt)
     {
         playerPrefab.tag = "RedPlayer";
+
+        playerPrefab.GetComponentInChildren<PlayerType>().ResetColor();
+        if(randomInt == 1) { playerPrefab.GetComponentInChildren<PlayerType>().isRed = true; }
+        else if(randomInt == 2) { playerPrefab.GetComponentInChildren<PlayerType>().isBlue = true; }
+        else if(randomInt == 3) { playerPrefab.GetComponentInChildren<PlayerType>().isLightBlue = true; }
+        else if(randomInt == 4) { playerPrefab.GetComponentInChildren<PlayerType>().isYellow = true; }
+        else if(randomInt == 5) { playerPrefab.GetComponentInChildren<PlayerType>().isPurple = true; }
+        else if(randomInt == 6) { playerPrefab.GetComponentInChildren<PlayerType>().isBlack = true; }
+        else if(randomInt == 7) { playerPrefab.GetComponentInChildren<PlayerType>().isWhite = true; }
+
         foreach(Transform spawnPoint in redTeamSpawnPoints)
         {
             Instantiate(playerPrefab, spawnPoint.position, Quaternion.identity);
         }
     }
-    private void SpawnBlueTeam(GameObject playerPrefab)
+    private void SpawnBlueTeam(GameObject playerPrefab, int randomInt)
     {
         playerPrefab.tag = "BluePlayer";
+        
+        playerPrefab.GetComponentInChildren<PlayerType>().ResetColor();
+        if(randomInt == 1) { playerPrefab.GetComponentInChildren<PlayerType>().isRed = true; }
+        else if(randomInt == 2) { playerPrefab.GetComponentInChildren<PlayerType>().isBlue = true; }
+        else if(randomInt == 3) { playerPrefab.GetComponentInChildren<PlayerType>().isLightBlue = true; }
+        else if(randomInt == 4) { playerPrefab.GetComponentInChildren<PlayerType>().isYellow = true; }
+        else if(randomInt == 5) { playerPrefab.GetComponentInChildren<PlayerType>().isPurple = true; }
+        else if(randomInt == 6) { playerPrefab.GetComponentInChildren<PlayerType>().isBlack = true; }
+        else if(randomInt == 7) { playerPrefab.GetComponentInChildren<PlayerType>().isWhite = true; }
+
         foreach(Transform spawnPoint in blueTeamSpawnPoints)
         {
             Instantiate(playerPrefab, spawnPoint.position, Quaternion.identity);
         }
-    }
-    private void SpawnTeam(string teamName, GameObject playerPrefab)
-    {
-        // switch(teamName)
-        // {
-        //     case "red":
-        //         ...
-        //         break;
-        //     case "blue":
-        //         ...
-        //         break;
-        //     default:
-        //         Debug.Log("Неправильное название команды!")
-        // }
-        // (teamName == "red") ? {} : {}
     }
 }

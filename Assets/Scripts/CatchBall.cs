@@ -30,6 +30,8 @@ public class CatchBall : MonoBehaviour
 
         defaultThrowAngle = throwAngle;
         defaultKickAngle = kickAngle;
+
+        isRed = (gameObject.tag == "RedPlayer");
     }
 
     private void Update()
