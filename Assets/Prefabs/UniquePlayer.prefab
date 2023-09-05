@@ -382,8 +382,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isRed: 0
   isBlue: 0
-  isLightBlue: 0
-  isYellow: 1
+  isLightBlue: 1
+  isYellow: 0
   isPurple: 0
   isBlack: 0
   isWhite: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class TeamSpawner : MonoBehaviour
 {
@@ -11,8 +12,14 @@ public class TeamSpawner : MonoBehaviour
 
     private List<int> nums = new List<int> {1, 2, 3, 4, 5, 6, 7};
 
+    private FileLogger logger;
+    
+    private string infoToLog = "";
+
     private void Start()
     {
+        logger = GetComponent<FileLogger>();
+        
         // от 0 до 8
         // в зависимости от цифры будет выбераться принадлежность к команде и её цвет
         // менять тэг, менять флажок цвета, менять сторону
@@ -108,7 +115,13 @@ public class TeamSpawner : MonoBehaviour
     
     private void SpawnRedTeam(GameObject playerPrefab, int randomInt)
     {
+        infoToLog += "\n\t";
+        
+        infoToLog += "Red Team Information:\n\t\t";
+        
         playerPrefab.tag = "RedPlayer";
+
+        infoToLog += "Tag: " + playerPrefab.tag + " | ";
 
         playerPrefab.GetComponentInChildren<PlayerType>().ResetColor();
         if(randomInt == 1) { playerPrefab.GetComponentInChildren<PlayerType>().isRed = true; }
@@ -123,11 +136,19 @@ public class TeamSpawner : MonoBehaviour
         {
             Instantiate(playerPrefab, spawnPoint.position, Quaternion.identity);
         }
+
+        infoToLog += "Team number: " + randomInt.ToString();
     }
     private void SpawnBlueTeam(GameObject playerPrefab, int randomInt)
     {
-        playerPrefab.tag = "BluePlayer";
+        infoToLog += "\n\t";
+
+        infoToLog += "Blue Team Information:\n\t\t";
         
+        playerPrefab.tag = "BluePlayer";
+
+        infoToLog += "Tag: " + playerPrefab.tag + " | ";
+
         playerPrefab.GetComponentInChildren<PlayerType>().ResetColor();
         if(randomInt == 1) { playerPrefab.GetComponentInChildren<PlayerType>().isRed = true; }
         else if(randomInt == 2) { playerPrefab.GetComponentInChildren<PlayerType>().isBlue = true; }
@@ -141,5 +162,10 @@ public class TeamSpawner : MonoBehaviour
         {
             Instantiate(playerPrefab, spawnPoint.position, Quaternion.identity);
         }
+
+        infoToLog += "Team number: " + randomInt.ToString() + "\n";
+        
+
+        logger.Log(infoToLog);
     }
 }
