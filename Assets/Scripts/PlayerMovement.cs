@@ -28,10 +28,15 @@ public class PlayerMovement : MonoBehaviour
     
     public bool canMove = true;
 
+    private UnitAction unitAction;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        unitAction = GetComponent<UnitAction>();
+        Debug.Log(Mathf.Sin(((float)unitAction.direction * Mathf.PI) / 180));
+        Debug.Log(Mathf.Cos(((float)unitAction.direction * Mathf.PI) / 180));
     }
 
     private void Update()
@@ -39,8 +44,8 @@ public class PlayerMovement : MonoBehaviour
         if(canMove)
         {
             // Input handling
-            horizontalInput = -Input.GetAxis("Horizontal");
-            verticalInput = -Input.GetAxis("Vertical");
+            horizontalInput = -Mathf.Cos(((float)gameObject.GetComponent<UnitAction>().direction * Mathf.PI) / 180);
+            verticalInput = -Mathf.Sin(((float)gameObject.GetComponent<UnitAction>().direction * Mathf.PI) / 180);
             Vector3 movementDirection = new Vector3(horizontalInput, 0, verticalInput).normalized;
 
             // Ground Check
@@ -56,7 +61,14 @@ public class PlayerMovement : MonoBehaviour
             RefillStamina();
 
             // Animation
-            Animation(movementDirection);
+            if(unitAction.type == UnitAction.Types.RUN)
+            {
+                Animation(movementDirection);
+            }
+            else
+            {
+                Animation(new Vector3(0, 0, 0));
+            }
 
             // Jump
             if (isGrounded && Input.GetButtonDown("Jump"))
@@ -68,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(canMove)
+        if(canMove && unitAction.type == UnitAction.Types.RUN)
         {
             // Movement
             Move();

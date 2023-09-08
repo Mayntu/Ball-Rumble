@@ -870,10 +870,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UniquePlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 2620617139699372134, guid: b2dcc23ea90c58d4da818abf0de00943, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3392791393568328412, guid: b2dcc23ea90c58d4da818abf0de00943, type: 3}
       propertyPath: m_RootOrder
       value: 21
@@ -3110,6 +3106,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4396321509375134370, guid: e365851c461c413429e0b326149c4e7f, type: 3}
+      propertyPath: throwAngle
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 4396321509375134370, guid: e365851c461c413429e0b326149c4e7f, type: 3}
       propertyPath: playerPositions.Array.data[1]
       value: 
       objectReference: {fileID: 2085775849}
@@ -5136,7 +5136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6053065288939106170, guid: e365851c461c413429e0b326149c4e7f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6866615471027140032, guid: e365851c461c413429e0b326149c4e7f, type: 3}
       propertyPath: m_RootOrder
@@ -5253,7 +5253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7617504274018616160, guid: d54f432bb4ec986479e2ac8af7c0db38, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8111220291234382272, guid: d54f432bb4ec986479e2ac8af7c0db38, type: 3}
       propertyPath: ball

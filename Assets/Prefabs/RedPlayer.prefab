@@ -249,6 +249,9 @@ MonoBehaviour:
   staminaCooldown: 3
   ball: {fileID: 0}
   gameManager: {fileID: 0}
+  throwAngleRange: 0
+  kickAngleRange: 0
+  canMove: 1
 --- !u!143 &8824264000385705540
 CharacterController:
   m_ObjectHideFlags: 0
@@ -313,8 +316,10 @@ MonoBehaviour:
   ball: {fileID: 0}
   throwForce: 1000
   throwAngle: 45
+  defaultThrowAngle: 0
   kickForce: 2000
   kickAngle: 30
+  defaultKickAngle: 0
   isRed: 1
   playerPositions:
   - {fileID: 6866615471027140032}
