@@ -1,23 +1,51 @@
 using UnityEngine;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 
 public class TournamentController : MonoBehaviour {
+    // класс будет синглтоном
+    private static TournamentController instance;
+    private static readonly Queue<Action> executionQueue = new Queue<Action>();
+
+    [SerializeField] private uint updatesPerRequest = 3;
     [SerializeField] private uint totalTeams = 2;
     [SerializeField] private uint unitsInTeam = 6; // в релизной версии должно быть по 6 юнитов в команде
     /* Важно! В любом случае, в каждой команде должно быть одинаковое количество юнитов!
        Иначе игра упадёт с NullReferenceException */
-    [SerializeField] private uint updatesPerRequest = 3;
     private uint updatesCount = 0;
     private TournamentPlayer[] teams = null;
     private UnitInfoCollection objectsInfo = new();
 
+
+
     void Awake() {
+        if (instance != null && instance != this) {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
         teams = new TournamentPlayer[totalTeams];
     }
+
 
     void Start() {
         createTestPlayers();
         createObjectsInfo();
     }
+
+
+    public static TournamentController Instance {
+        get {
+            // если экземпляр не был создан - значит, что-то не так со сценой, падаем!
+            if (instance == null) {
+                throw new Exception("NO instance of TournamentController!");
+            }
+            return instance;
+        }
+    }
+
+    
 
     void FixedUpdate() {
         updatesCount++;
@@ -29,11 +57,43 @@ public class TournamentController : MonoBehaviour {
         }
     }
 
+    private void Update() {
+        lock (executionQueue) {
+            while (executionQueue.Count > 0) {
+                executionQueue.Dequeue().Invoke();
+            }
+        }
+    }
+
+
+    public void Enqueue(Action action) {
+        lock (executionQueue) {
+            executionQueue.Enqueue(action);
+        }
+    }
+
+
+    private string[] actionNames = new[] { "none", "run", "throw", "kick", "jump" };
+
+    public void refreshUnitActions(int team_id, UnitActionCollection actions) {
+        // TODO: использовать team_id чтобы "переворачивать" direction для действий
+        foreach(UnitActionRecord action in actions.data) {
+            GameObject unit = GameObject.Find(action.id.ToString());
+            int act_type = Array.IndexOf(actionNames, action.type);
+            if (act_type != -1) {
+                unit.GetComponent<UnitAction>().set((UnitAction.Types)act_type, action.force, action.direction, action.angle);
+            }
+        }
+    }
+
+
     private void refreshObjectsInfo() {
         foreach(UnitInfo unit in objectsInfo.data) {
             unit.refresh();
         }
     }
+
+
 
     private void createObjectsInfo() {
         // размер массива в objectsInfo: количество команд * юнитов в команде + мяч + 4 штанги
@@ -69,4 +129,8 @@ public class TournamentController : MonoBehaviour {
             unitsInTeam = (uint) GameObject.FindGameObjectsWithTag(playerName).Length;
         }
     }
+
+
+
+
 }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class UnitAction : MonoBehaviour {
@@ -15,22 +16,26 @@ public class UnitAction : MonoBehaviour {
     public double verticalAngle = 0;
 
 
-    void set(Types actionType, uint actionForce, double relativeDirection = 0, double verticalAngle = 0) {
+    public void set(Types actionType, uint actionForce, double relativeDirection = 0, double verticalAngle = 0) {
         type = actionType;
         force = (actionForce <= 100) ? actionForce : 100;
         direction = relativeDirection;
         this.verticalAngle = verticalAngle;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+[Serializable]
+public class UnitActionRecord {
+    public int id;
+    public string type;
+    public uint force;
+    public double direction;
+    public double angle;
+}
+
+[Serializable]
+public class UnitActionCollection {
+    public UnitActionRecord[] data;
 }
