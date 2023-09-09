@@ -858,6 +858,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3062161105075571181, guid: b2dcc23ea90c58d4da818abf0de00943, type: 3}
+      propertyPath: isBlue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3062161105075571181, guid: b2dcc23ea90c58d4da818abf0de00943, type: 3}
+      propertyPath: isBlack
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 495917740798132914, guid: b2dcc23ea90c58d4da818abf0de00943, type: 3}
       propertyPath: ball
       value: 
@@ -876,7 +884,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2620617139699372134, guid: b2dcc23ea90c58d4da818abf0de00943, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3392791393568328412, guid: b2dcc23ea90c58d4da818abf0de00943, type: 3}
       propertyPath: m_RootOrder
