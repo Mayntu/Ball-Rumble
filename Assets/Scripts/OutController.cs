@@ -19,6 +19,7 @@ public class OutController : MonoBehaviour
     {
         if (isOut)
         {
+            ball.SetActive(true);
             if (ball.transform.position.z < -30)
             {
                 OutEntry.z = -33;
@@ -51,6 +52,7 @@ public class OutController : MonoBehaviour
 
             ball.GetComponent<Rigidbody>().isKinematic = true;
 
+            ball.SetActive(false);
             StartCoroutine(Wait());
         }
     }
