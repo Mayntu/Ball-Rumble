@@ -196,7 +196,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1006650277294117747
 Transform:
   m_ObjectHideFlags: 0
@@ -3791,8 +3791,13 @@ MonoBehaviour:
   isLightBlue: 0
   isYellow: 0
   isPurple: 0
-  isBlack: 1
+  isBlack: 0
   isWhite: 0
+  animator: {fileID: 0}
+  blackAvatar: {fileID: 9000000, guid: 39af34742b4f6ff4db67b272739a293c, type: 3}
+  yellowAvatar: {fileID: 9000000, guid: b43297b5af952064780bbee868b3c1af, type: 3}
+  blackSkin: {fileID: 482878823992019401}
+  yellowSkin: {fileID: 754365686594162908}
 --- !u!4 &3392791393568328412 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 674a565fe4d34f04f808c52bc94cafe9, type: 3}
