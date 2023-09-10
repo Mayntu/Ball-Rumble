@@ -10,7 +10,7 @@ public class TeamSpawner : MonoBehaviour
     [SerializeField] private Transform[] redTeamSpawnPoints;
     [SerializeField] private Transform[] blueTeamSpawnPoints;
 
-    private List<int> nums = new List<int> {1, 2, 3, 4, 5, 6, 7};
+    private List<int> nums = new List<int> {1, 2, 3, 4, 5, 6, 7, 8};
 
     private FileLogger logger;
     
@@ -68,6 +68,11 @@ public class TeamSpawner : MonoBehaviour
             SpawnRedTeam(uniquePlayerPrefab, randomInt);
             nums.RemoveAt(nums.IndexOf(randomInt));
         }
+        else if(randomInt == 8)
+        {
+            SpawnRedTeam(uniquePlayerPrefab, randomInt);
+            nums.RemoveAt(nums.IndexOf(randomInt));
+        }
 
         
         Debug.Log(nums.Count);
@@ -111,6 +116,11 @@ public class TeamSpawner : MonoBehaviour
             SpawnBlueTeam(uniquePlayerPrefab, randomInt);
             nums.RemoveAt(nums.IndexOf(randomInt));
         }
+        else if(randomInt == 8)
+        {
+            SpawnBlueTeam(uniquePlayerPrefab, randomInt);
+            nums.RemoveAt(nums.IndexOf(randomInt));
+        }
     }
     
     private void SpawnRedTeam(GameObject playerPrefab, int randomInt)
@@ -131,6 +141,7 @@ public class TeamSpawner : MonoBehaviour
         else if(randomInt == 5) { playerPrefab.GetComponentInChildren<PlayerType>().isPurple = true; }
         else if(randomInt == 6) { playerPrefab.GetComponentInChildren<PlayerType>().isBlack = true; }
         else if(randomInt == 7) { playerPrefab.GetComponentInChildren<PlayerType>().isWhite = true; }
+        else if(randomInt == 8) { playerPrefab.GetComponentInChildren<PlayerType>().isPink = true; }
 
         foreach(Transform spawnPoint in redTeamSpawnPoints)
         {
@@ -157,6 +168,7 @@ public class TeamSpawner : MonoBehaviour
         else if(randomInt == 5) { playerPrefab.GetComponentInChildren<PlayerType>().isPurple = true; }
         else if(randomInt == 6) { playerPrefab.GetComponentInChildren<PlayerType>().isBlack = true; }
         else if(randomInt == 7) { playerPrefab.GetComponentInChildren<PlayerType>().isWhite = true; }
+        else if(randomInt == 7) { playerPrefab.GetComponentInChildren<PlayerType>().isPink = true; }
 
         foreach(Transform spawnPoint in blueTeamSpawnPoints)
         {

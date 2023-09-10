@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerType : MonoBehaviour
 {
-    public bool isRed, isBlue, isLightBlue, isYellow, isPurple, isBlack, isWhite;
+    public bool isRed, isBlue, isLightBlue, isYellow, isPurple, isBlack, isWhite, isPink;
 
     private void Start()
     {
@@ -25,5 +25,6 @@ public class PlayerType : MonoBehaviour
         isPurple = false;
         isBlack = false;
         isWhite = false;
+        isPink = false;
     }
 }
