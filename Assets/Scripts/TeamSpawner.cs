@@ -168,7 +168,7 @@ public class TeamSpawner : MonoBehaviour
         else if(randomInt == 5) { playerPrefab.GetComponentInChildren<PlayerType>().isPurple = true; }
         else if(randomInt == 6) { playerPrefab.GetComponentInChildren<PlayerType>().isBlack = true; }
         else if(randomInt == 7) { playerPrefab.GetComponentInChildren<PlayerType>().isWhite = true; }
-        else if(randomInt == 7) { playerPrefab.GetComponentInChildren<PlayerType>().isPink = true; }
+        else if(randomInt == 8) { playerPrefab.GetComponentInChildren<PlayerType>().isPink = true; }
 
         foreach(Transform spawnPoint in blueTeamSpawnPoints)
         {
