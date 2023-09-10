@@ -884,7 +884,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2620617139699372134, guid: b2dcc23ea90c58d4da818abf0de00943, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3392791393568328412, guid: b2dcc23ea90c58d4da818abf0de00943, type: 3}
       propertyPath: m_RootOrder
@@ -892,7 +892,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3392791393568328412, guid: b2dcc23ea90c58d4da818abf0de00943, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.365598
+      value: 14.51
       objectReference: {fileID: 0}
     - target: {fileID: 3392791393568328412, guid: b2dcc23ea90c58d4da818abf0de00943, type: 3}
       propertyPath: m_LocalPosition.y
@@ -900,7 +900,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3392791393568328412, guid: b2dcc23ea90c58d4da818abf0de00943, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 23.78
+      value: 36.87
       objectReference: {fileID: 0}
     - target: {fileID: 3392791393568328412, guid: b2dcc23ea90c58d4da818abf0de00943, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2818,6 +2818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 1161707491}
+  ballTrail: {fileID: 654981011}
 --- !u!1 &1286279158
 GameObject:
   m_ObjectHideFlags: 0
@@ -4549,6 +4550,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 1161707491}
+  ballTrail: {fileID: 654981011}
 --- !u!1 &1936882846
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class OutController : MonoBehaviour
 {
-    [SerializeField] GameObject ball;
+    [SerializeField] private GameObject ball;
+    [SerializeField] private GameObject ballTrail;
 
     private float outThrowForce;
     private bool isOut = false;
@@ -15,11 +16,11 @@ public class OutController : MonoBehaviour
 
     }
 
-    void Update()
+    private void Update()
     {
         if (isOut)
         {
-            ball.SetActive(true);
+            ballTrail.SetActive(true);
             if (ball.transform.position.z < -30)
             {
                 OutEntry.z = -33;
@@ -52,7 +53,7 @@ public class OutController : MonoBehaviour
 
             ball.GetComponent<Rigidbody>().isKinematic = true;
 
-            ball.SetActive(false);
+            ballTrail.SetActive(false);
             StartCoroutine(Wait());
         }
     }

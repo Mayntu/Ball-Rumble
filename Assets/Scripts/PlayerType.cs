@@ -7,21 +7,51 @@ public class PlayerType : MonoBehaviour
     public bool isRed, isBlue, isLightBlue, isYellow, isPurple, isBlack, isWhite, isPink;
 
     public Animator animator;
-    public Avatar blackAvatar, yellowAvatar;
-    public GameObject blackSkin, yellowSkin;
+    public Avatar redAvatar, blueAvatar, lightBlueAvatar, yellowAvatar, purpleAvatar, blackAvatar, whiteAvatar, pinkAvatar;
+    public GameObject redSkin, blueSkin, lightBlueSkin, yellowSkin, purpleSkin, blackSkin, whiteSkin, pinkSkin;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
-        if (isBlack)
+        if (isRed)
         {
-            animator.avatar = blackAvatar;
-            blackSkin.SetActive(true);
+            animator.avatar = redAvatar;
+            redSkin.SetActive(true);
+        }
+        else if (isBlue)
+        {
+            animator.avatar = blueAvatar;
+            blueSkin.SetActive(true);
+        }
+        else if (isLightBlue)
+        {
+            animator.avatar = lightBlueAvatar;
+            lightBlueSkin.SetActive(true);
         }
         else if (isYellow)
         {
             animator.avatar = yellowAvatar;
             yellowSkin.SetActive(true);
+        }
+        else if (isPurple)
+        {
+            animator.avatar = purpleAvatar;
+            purpleSkin.SetActive(true);
+        }
+        else if (isBlack)
+        {
+            animator.avatar = blackAvatar;
+            blackSkin.SetActive(true);
+        }
+        else if (isWhite)
+        {
+            animator.avatar = whiteAvatar;
+            whiteSkin.SetActive(true);
+        }
+        else if (isPink)
+        {
+            animator.avatar = pinkAvatar;
+            pinkSkin.SetActive(true);
         }
     }
 
