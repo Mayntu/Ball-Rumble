@@ -53,7 +53,11 @@ public class TournamentController : MonoBehaviour {
         updatesCount = 0;
         refreshObjectsInfo();
         foreach(TournamentPlayer player in teams) {
-            player.requestActions(objectsInfo);
+            if (player.playerId() == 0) {
+                player.requestActions(objectsInfo);
+            } else {
+                player.requestActions(objectsInfo.mirrored());
+            }
         }
     }
 
@@ -76,8 +80,10 @@ public class TournamentController : MonoBehaviour {
     private string[] actionNames = new[] { "none", "run", "throw", "kick", "jump" };
 
     public void refreshUnitActions(int team_id, UnitActionCollection actions) {
-        // TODO: использовать team_id чтобы "переворачивать" direction для действий
         foreach(UnitActionRecord action in actions.data) {
+            if (team_id == 1) {
+                action.mirror();
+            }
             GameObject unit = GameObject.Find(action.id.ToString());
             int act_type = Array.IndexOf(actionNames, action.type);
             if (act_type != -1) {

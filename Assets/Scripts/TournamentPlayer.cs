@@ -19,6 +19,10 @@ public class TournamentPlayer {
         return player.name;
     }
 
+    public int playerId() {
+        return player.id;
+    }
+
     public string info() {
         string template = "Client {0} '{1}', on {2}:{3}";
         return string.Format(template, player.id, player.name, player.host, player.port);

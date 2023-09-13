@@ -33,6 +33,10 @@ public class UnitActionRecord {
     public uint force;
     public double direction;
     public double angle;
+
+    public void mirror() {
+        direction = direction - 180;
+    }
 }
 
 [Serializable]

@@ -17,18 +17,40 @@ public class UnitInfo {
         //size.radius = unit.GetComponent<CapsuleCollider>().radius;
     }
 
+    public UnitInfo(UnitInfo other) {
+        id = other.id;
+        tag = other.tag;
+        position = new(other.position.x, other.position.y, other.position.z);
+        size = other.size;
+    }
+
+    public void mirror() {
+        position.x *= -1;
+        position.z *= -1;
+    }
+
     public void refresh() {
         GameObject obj = GameObject.Find(id.ToString());
         position = obj.transform.position;
         //size.height = obj.GetComponent<CapsuleCollider>().height;
         //size.radius = obj.GetComponent<CapsuleCollider>().radius;
     }
+
 }
 
 
 [Serializable]
 public class UnitInfoCollection {
     public UnitInfo[] data;
+    public UnitInfoCollection mirrored() {
+        UnitInfoCollection c = new();
+        c.data = new UnitInfo[data.Length];
+        for(int i = 0; i < data.Length; i++) {
+            c.data[i] = new UnitInfo(data[i]);
+            c.data[i].mirror();
+        }
+        return c;
+    }
 }
 
 [Serializable]

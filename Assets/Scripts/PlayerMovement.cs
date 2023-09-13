@@ -44,8 +44,8 @@ public class PlayerMovement : MonoBehaviour
         if(canMove)
         {
             // Input handling
-            horizontalInput = -Mathf.Cos(((float)gameObject.GetComponent<UnitAction>().direction * Mathf.PI) / 180);
-            verticalInput = -Mathf.Sin(((float)gameObject.GetComponent<UnitAction>().direction * Mathf.PI) / 180);
+            horizontalInput = Mathf.Cos(((float)gameObject.GetComponent<UnitAction>().direction * Mathf.PI) / 180);
+            verticalInput = Mathf.Sin(((float)gameObject.GetComponent<UnitAction>().direction * Mathf.PI) / 180);
             Vector3 movementDirection = new Vector3(horizontalInput, 0, verticalInput).normalized;
 
             // Ground Check
