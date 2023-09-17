@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool canHeal;
     private bool isGrounded;
+    private bool isJumping;
     private Rigidbody rb;
     private Animator animator;
     private float horizontalInput;
@@ -71,9 +72,9 @@ public class PlayerMovement : MonoBehaviour
             }
 
             // Jump
-            if (isGrounded && Input.GetButtonDown("Jump"))
+            if (isGrounded && unitAction.type == UnitAction.Types.JUMP)
             {
-                Jump();
+                isJumping = true;
             }
         }
     }
@@ -84,6 +85,10 @@ public class PlayerMovement : MonoBehaviour
         {
             // Movement
             Move();
+        }
+        if(isJumping)
+        {
+            Jump();
         }
     }
 
@@ -100,6 +105,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
+        isJumping = false;
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 

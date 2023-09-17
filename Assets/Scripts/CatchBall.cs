@@ -22,8 +22,11 @@ public class CatchBall : MonoBehaviour
     private Animator animator;
     private Rigidbody ballRigidbody;
     private float previousRotationAngle;
+
+    private UnitAction unitAction;
     private void Start()
     {
+        unitAction = GetComponent<UnitAction>();
         ball = GameObject.FindGameObjectWithTag("Ball");
         animator= GetComponent<Animator>();
         ballRigidbody = ball.GetComponent<Rigidbody>();
@@ -42,7 +45,7 @@ public class CatchBall : MonoBehaviour
         {
             if (currentRotationAngle >= 205f && currentRotationAngle <= 325f)
             {
-                if (Input.GetKeyDown(KeyCode.E) && isCatched)
+                if (unitAction.type == UnitAction.Types.THROW && isCatched)
                 {
                     Debug.Log("Вперёд бросать нельзя");
                     return;
@@ -53,7 +56,7 @@ public class CatchBall : MonoBehaviour
         {
             if (currentRotationAngle >= 35f && currentRotationAngle <= 155f)
             {
-                if (Input.GetKeyDown(KeyCode.E) && isCatched)
+                if (unitAction.type == UnitAction.Types.THROW && isCatched)
                 {
                     Debug.Log("Вперёд бросать нельзя");
                     return;
@@ -73,11 +76,11 @@ public class CatchBall : MonoBehaviour
             activePlayer = gameObject;
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && isCatched)
+        if (unitAction.type == UnitAction.Types.THROW && isCatched)
         {
             ThrowBall();
         }
-        else if (Input.GetKeyDown(KeyCode.Q) && isCatched && isRed)
+        else if (unitAction.type == UnitAction.Types.KICK && isCatched && isRed)
         {
             GetPlayerPositions("RedPlayer");
             // Находим самую маленькую позицию по X среди игроков
@@ -103,7 +106,7 @@ public class CatchBall : MonoBehaviour
                 Debug.Log("Впереди другие игроки, ударять нельзя");
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Q) && isCatched && !isRed)
+        else if (unitAction.type == UnitAction.Types.KICK && isCatched && !isRed)
         {
             GetPlayerPositions("BluePlayer");
             // Находим самую маленькую позицию по X среди игроков
@@ -150,6 +153,8 @@ public class CatchBall : MonoBehaviour
         ball.transform.SetParent(null);
         ballRigidbody.isKinematic = false;
         
+        throwForce = unitAction.force;
+        throwAngle = (float)unitAction.verticalAngle;
         throwAngle += gameObject.GetComponent<PlayerMovement>().ThrowAngleRange();
         Debug.Log(throwAngle);
         // Применение фиксированной силы и угла броска к мячу
@@ -163,6 +168,8 @@ public class CatchBall : MonoBehaviour
         ball.transform.SetParent(null);
         ballRigidbody.isKinematic = false;
         
+        kickForce = unitAction.force;
+        kickAngle = (float)unitAction.verticalAngle;
         kickAngle += gameObject.GetComponent<PlayerMovement>().KickAngleRange();
         Debug.Log(kickAngle);
         // Применение фиксированной силы и угла броска к мячу
