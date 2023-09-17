@@ -65,7 +65,11 @@ public class CatchBall : MonoBehaviour
 
         if (isCatched)
         {
+            // ball.transform.position = handsPosition.position;
+            // ball.transform.rotation = handsPosition.rotation;
+            ball.transform.SetParent(handsPosition);
             ball.transform.position = handsPosition.position;
+            ballRigidbody.isKinematic = true;
             activePlayer = gameObject;
         }
 
@@ -143,6 +147,8 @@ public class CatchBall : MonoBehaviour
     private void ThrowBall()
     {
         isCatched = false;
+        ball.transform.SetParent(null);
+        ballRigidbody.isKinematic = false;
         
         throwAngle += gameObject.GetComponent<PlayerMovement>().ThrowAngleRange();
         Debug.Log(throwAngle);
@@ -154,6 +160,8 @@ public class CatchBall : MonoBehaviour
     private void KickBall()
     {
         isCatched = false;
+        ball.transform.SetParent(null);
+        ballRigidbody.isKinematic = false;
         
         kickAngle += gameObject.GetComponent<PlayerMovement>().KickAngleRange();
         Debug.Log(kickAngle);
