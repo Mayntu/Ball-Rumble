@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager");
         unitAction = GetComponent<UnitAction>();
         Debug.Log(Mathf.Sin(((float)unitAction.direction * Mathf.PI) / 180));
         Debug.Log(Mathf.Cos(((float)unitAction.direction * Mathf.PI) / 180));

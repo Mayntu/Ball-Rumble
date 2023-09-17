@@ -41,24 +41,24 @@ public class CatchBall : MonoBehaviour
     {
         float currentRotationAngle = transform.eulerAngles.y;
 
-        if(isRed)
+        if(!isRed)
         {
             if (currentRotationAngle >= 205f && currentRotationAngle <= 325f)
             {
                 if (unitAction.type == UnitAction.Types.THROW && isCatched)
                 {
-                    Debug.Log("Вперёд бросать нельзя");
+                    // Debug.Log("Вперёд бросать нельзя");
                     return;
                 }
             }
         }
-        else if(!isRed)
+        else if(isRed)
         {
             if (currentRotationAngle >= 35f && currentRotationAngle <= 155f)
             {
                 if (unitAction.type == UnitAction.Types.THROW && isCatched)
                 {
-                    Debug.Log("Вперёд бросать нельзя");
+                    // Debug.Log("Вперёд бросать нельзя");
                     return;
                 }
             }
@@ -80,9 +80,9 @@ public class CatchBall : MonoBehaviour
         {
             ThrowBall();
         }
-        else if (unitAction.type == UnitAction.Types.KICK && isCatched && isRed)
+        else if (unitAction.type == UnitAction.Types.KICK && isCatched && !isRed)
         {
-            GetPlayerPositions("RedPlayer");
+            GetPlayerPositions("BluePlayer");
             // Находим самую маленькую позицию по X среди игроков
             float minX = Mathf.Infinity;
 
@@ -106,9 +106,9 @@ public class CatchBall : MonoBehaviour
                 Debug.Log("Впереди другие игроки, ударять нельзя");
             }
         }
-        else if (unitAction.type == UnitAction.Types.KICK && isCatched && !isRed)
+        else if (unitAction.type == UnitAction.Types.KICK && isCatched && isRed)
         {
-            GetPlayerPositions("BluePlayer");
+            GetPlayerPositions("RedPlayer");
             // Находим самую маленькую позицию по X среди игроков
             float maxX = Mathf.NegativeInfinity;
 
