@@ -30,7 +30,7 @@ class GameConnector:
             except ValueError:
                 pass
 
-            print("\nGot request: ", request)
+            # print("\nGot request: ", request)
             if 'actions' in request:
                 response_data = self.process(request['actions']['data'])
 

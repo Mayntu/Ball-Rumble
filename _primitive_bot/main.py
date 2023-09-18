@@ -19,7 +19,7 @@ def main_logic(game_objects):
 			act = {'id': u['id'], 'type': 'run', 'force': 500, 'direction': hlp.direction(u['position'], ball['position']), 'angle': 0}
 		actions.append(act)
 
-	return actions 	# возвращаем список действий для своих юнитов
+	return actions 	# возвращаем список действий своих юнитов
 
 
 
