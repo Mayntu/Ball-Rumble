@@ -7,12 +7,15 @@ public class UnitInfo {
     public string tag;
     public Vector3 position;
     public UnitSize size;
+    public bool has_ball;
 
     public UnitInfo(GameObject unit) {
         id = unit.GetInstanceID();
         unit.name = id.ToString();
         tag = unit.tag;
         position = unit.transform.position;
+        CatchBall ball = unit.GetComponent<CatchBall>();
+        has_ball = (ball != null) && ball.isCatched;
         //size.height = unit.GetComponent<CapsuleCollider>().height;
         //size.radius = unit.GetComponent<CapsuleCollider>().radius;
     }
@@ -22,6 +25,7 @@ public class UnitInfo {
         tag = other.tag;
         position = new(other.position.x, other.position.y, other.position.z);
         size = other.size;
+        has_ball = other.has_ball;
     }
 
     public void mirror() {
@@ -32,6 +36,8 @@ public class UnitInfo {
     public void refresh() {
         GameObject obj = GameObject.Find(id.ToString());
         position = obj.transform.position;
+        CatchBall ball = obj.GetComponent<CatchBall>();
+        has_ball = (ball != null) && ball.isCatched;
         //size.height = obj.GetComponent<CapsuleCollider>().height;
         //size.radius = obj.GetComponent<CapsuleCollider>().radius;
     }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class GoalSystem : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class GoalSystem : MonoBehaviour
     [SerializeField] private int blueScore;
     [SerializeField] private int redScore;
 
+    [SerializeField] private TMP_Text blueTeamScore;
+    [SerializeField] private TMP_Text redTeamScore;
+
     void Start()
     {
         
@@ -23,5 +27,14 @@ public class GoalSystem : MonoBehaviour
     void Update()
     {
         
+    }
+    private void FixedUpdate()
+    {
+        UpdateUI();
+    }
+    public void UpdateUI()
+    {
+        blueTeamScore.SetText(blueScore.ToString());
+        redTeamScore.SetText(redScore.ToString());
     }
 }

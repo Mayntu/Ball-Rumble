@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool canHeal;
     private bool isGrounded;
+    private bool isJumping;
     private Rigidbody rb;
     private Animator animator;
     private float horizontalInput;
@@ -34,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager");
         unitAction = GetComponent<UnitAction>();
         Debug.Log(Mathf.Sin(((float)unitAction.direction * Mathf.PI) / 180));
         Debug.Log(Mathf.Cos(((float)unitAction.direction * Mathf.PI) / 180));
@@ -71,9 +73,9 @@ public class PlayerMovement : MonoBehaviour
             }
 
             // Jump
-            if (isGrounded && Input.GetButtonDown("Jump"))
+            if (isGrounded && unitAction.type == UnitAction.Types.JUMP)
             {
-                Jump();
+                isJumping = true;
             }
         }
     }
@@ -85,6 +87,10 @@ public class PlayerMovement : MonoBehaviour
             // Movement
             Move();
         }
+        if(isJumping)
+        {
+            Jump();
+        }
     }
 
     private void Move()
@@ -92,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded)
         {
             Vector3 moveDirection = new Vector3(horizontalInput, 0, verticalInput).normalized;
-            Vector3 moveVelocity = moveDirection * (Input.GetKey(KeyCode.LeftShift) && stamina > 0 ? sprintSpeed : movementSpeed);
+            Vector3 moveVelocity = moveDirection * (unitAction.force > 700 && stamina > 0 ? sprintSpeed : movementSpeed);
 
             rb.velocity = new Vector3(moveVelocity.x, rb.velocity.y, moveVelocity.z);
         }
@@ -100,6 +106,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
+        isJumping = false;
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
@@ -114,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Sprint()
     {
-        if (Input.GetKey(KeyCode.LeftShift) && stamina > 0)
+        if (unitAction.force > 700 && stamina > 0)
         {
             timeSinceSprint = 0;
             canHeal = false;
