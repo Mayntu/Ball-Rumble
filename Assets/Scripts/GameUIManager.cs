@@ -1,33 +1,37 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameUIManager : MonoBehaviour
 {
-    public Text timerText;
-    public float startTime = 180f;
+    [SerializeField] private TMP_Text timerText;
+    [SerializeField] private float startTime;
+    [SerializeField] private GameObject pausePanel;
 
     private float currentTime;
 
-    public Text blueTeamName;
-    public Text redTeamName;
-    public Text score;
+    // public Text blueTeamName;
+    // public Text redTeamName;
+    // public Text score;
 
-    public GameObject scoreManager;
-    public GameObject namesManager;
+    // public GameObject scoreManager;
+    // public GameObject namesManager;
 
     private void Start()
     {
         currentTime = startTime;
 
-        scoreManager = GameObject.FindGameObjectWithTag("GameManager");
+        // scoreManager = GameObject.FindGameObjectWithTag("GameManager");
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        currentTime -= Time.deltaTime;
+        currentTime -= Time.fixedDeltaTime;
         if (currentTime < 0f)
         {
             currentTime = 0f;
+            pausePanel.SetActive(true);
+            Time.timeScale = 0f;
         }
 
         int minutes = Mathf.FloorToInt(currentTime / 60f);
@@ -37,16 +41,16 @@ public class GameUIManager : MonoBehaviour
 
         timerText.text = timeString;
 
-        score.text = scoreManager.GetComponent<GoalSystem>().RedScore.ToString() + ":" + scoreManager.GetComponent<GoalSystem>().BlueScore.ToString();
+        // score.text = scoreManager.GetComponent<GoalSystem>().RedScore.ToString() + ":" + scoreManager.GetComponent<GoalSystem>().BlueScore.ToString();
 
 
-        if (PlayerPrefs.HasKey("BlueName"))
-        {
-            blueTeamName.text = PlayerPrefs.GetString("BlueName");
-        }
-        if (PlayerPrefs.HasKey("RedName"))
-        {
-            redTeamName.text = PlayerPrefs.GetString("RedName");
-        }
+        // if (PlayerPrefs.HasKey("BlueName"))
+        // {
+        //     blueTeamName.text = PlayerPrefs.GetString("BlueName");
+        // }
+        // if (PlayerPrefs.HasKey("RedName"))
+        // {
+        //     redTeamName.text = PlayerPrefs.GetString("RedName");
+        // }
     }
 }

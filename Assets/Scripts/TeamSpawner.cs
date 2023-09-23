@@ -20,6 +20,9 @@ public class TeamSpawner : MonoBehaviour
     [SerializeField] List<TeamNamePanel> redTeamPanels = new List<TeamNamePanel>();
     [SerializeField] List<TeamNamePanel> blueTeamPanels = new List<TeamNamePanel>();
 
+    [SerializeField] private GameObject redTrigger;
+    [SerializeField] private GameObject blueTrigger;
+
     private GameObject[] redTeam;
     private GameObject[] blueTeam;
 
@@ -201,6 +204,8 @@ public class TeamSpawner : MonoBehaviour
     }
     IEnumerator DoGoal()
     {
+        redTrigger.GetComponent<TouchDownScore>().canAdd = false;
+        blueTrigger.GetComponent<TouchDownScore>().canAdd = false;
         ball = GameObject.FindGameObjectWithTag("Ball");
         redTeam = GameObject.FindGameObjectsWithTag("RedPlayer");
         blueTeam = GameObject.FindGameObjectsWithTag("BluePlayer");
@@ -225,6 +230,8 @@ public class TeamSpawner : MonoBehaviour
             blueTeam[i].GetComponent<PlayerMovement>().canMove = true;
         }
         ball.transform.position = ballSpawnPoint.position;
+        redTrigger.GetComponent<TouchDownScore>().canAdd = true;
+        blueTrigger.GetComponent<TouchDownScore>().canAdd = true;
     }
     private void SetImageEnabled(List<TeamNamePanel> list, string teamName, bool value)
     {
