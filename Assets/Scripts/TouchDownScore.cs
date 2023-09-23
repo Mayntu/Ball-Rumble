@@ -5,26 +5,30 @@ using UnityEngine;
 public class TouchDownScore : MonoBehaviour
 {
     [SerializeField] private GameObject gameManager;
+    public bool canAdd = true;
     private void OnTriggerEnter(Collider other)
     {
-        if(gameObject.CompareTag("BlueTrigger"))
+        if(canAdd)
         {
-            if(other.CompareTag("RedPlayer") && other.GetComponent<CatchBall>().isCatched)
+            if(gameObject.CompareTag("BlueTrigger"))
             {
-                Debug.Log("+5 красным");
-                gameManager.GetComponent<GoalSystem>().BlueScore += 5;
-                gameManager.GetComponent<GoalSystem>().UpdateUI();
-                gameManager.GetComponent<TeamSpawner>().RespawnTeams();
+                if(other.CompareTag("RedPlayer") && other.GetComponent<CatchBall>().isCatched)
+                {
+                    Debug.Log("+5 красным");
+                    gameManager.GetComponent<GoalSystem>().RedScore += 5;
+                    gameManager.GetComponent<GoalSystem>().UpdateUI();
+                    gameManager.GetComponent<TeamSpawner>().RespawnTeams();
+                }
             }
-        }
-        else if(gameObject.CompareTag("RedTrigger"))
-        {
-            if(other.CompareTag("BluePlayer") && other.GetComponent<CatchBall>().isCatched)
+            else if(gameObject.CompareTag("RedTrigger"))
             {
-                Debug.Log("+5 синим");
-                gameManager.GetComponent<GoalSystem>().RedScore += 5;
-                gameManager.GetComponent<GoalSystem>().UpdateUI();
-                gameManager.GetComponent<TeamSpawner>().RespawnTeams();
+                if(other.CompareTag("BluePlayer") && other.GetComponent<CatchBall>().isCatched)
+                {
+                    Debug.Log("+5 синим");
+                    gameManager.GetComponent<GoalSystem>().BlueScore += 5;
+                    gameManager.GetComponent<GoalSystem>().UpdateUI();
+                    gameManager.GetComponent<TeamSpawner>().RespawnTeams();
+                }
             }
         }
     }

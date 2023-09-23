@@ -6,6 +6,7 @@ public class GameUIManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private float startTime;
+    [SerializeField] private GameObject pausePanel;
 
     private float currentTime;
 
@@ -29,6 +30,8 @@ public class GameUIManager : MonoBehaviour
         if (currentTime < 0f)
         {
             currentTime = 0f;
+            pausePanel.SetActive(true);
+            Time.timeScale = 0f;
         }
 
         int minutes = Mathf.FloorToInt(currentTime / 60f);
