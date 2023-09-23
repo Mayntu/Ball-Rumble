@@ -9,6 +9,12 @@ public class TeamSpawner : MonoBehaviour
 
     [SerializeField] private Transform[] redTeamSpawnPoints;
     [SerializeField] private Transform[] blueTeamSpawnPoints;
+    [SerializeField] private Transform ballSpawnPoint;
+
+    private GameObject[] redTeam;
+    private GameObject[] blueTeam;
+
+    private GameObject ball;
 
     private List<int> nums = new List<int> {1, 2, 3, 4, 5, 6, 7, 8};
 
@@ -122,7 +128,7 @@ public class TeamSpawner : MonoBehaviour
             nums.RemoveAt(nums.IndexOf(randomInt));
         }
     }
-    
+
     private void SpawnRedTeam(GameObject playerPrefab, int randomInt)
     {
         infoToLog += "\n\t";
@@ -179,5 +185,36 @@ public class TeamSpawner : MonoBehaviour
         
 
         logger.Log(infoToLog);
+    }
+    public void RespawnTeams()
+    {
+        StartCoroutine(DoGoal());
+    }
+    IEnumerator DoGoal()
+    {
+        ball = GameObject.FindGameObjectWithTag("Ball");
+        redTeam = GameObject.FindGameObjectsWithTag("RedPlayer");
+        blueTeam = GameObject.FindGameObjectsWithTag("BluePlayer");
+        yield return new WaitForSeconds(0.2f);
+        ball.GetComponent<Rigidbody>().isKinematic = true;
+        for(int i = 0; i < redTeam.Length; i++)
+        {
+            redTeam[i].GetComponent<PlayerMovement>().canMove = false;
+            blueTeam[i].GetComponent<PlayerMovement>().canMove = false;
+        }
+        yield return new WaitForSeconds(1.5f);
+        for(int i = 0; i < redTeamSpawnPoints.Length; i++)
+        {
+            redTeam[i].GetComponent<CatchBall>().DropBall();
+            redTeam[i].transform.position = redTeamSpawnPoints[i].position;
+            redTeam[i].GetComponent<PlayerMovement>().canMove = true;
+        }
+        for(int i = 0; i < blueTeamSpawnPoints.Length; i++)
+        {
+            blueTeam[i].GetComponent<CatchBall>().DropBall();
+            blueTeam[i].transform.position = blueTeamSpawnPoints[i].position;
+            blueTeam[i].GetComponent<PlayerMovement>().canMove = true;
+        }
+        ball.transform.position = ballSpawnPoint.position;
     }
 }

@@ -178,6 +178,15 @@ public class CatchBall : MonoBehaviour
         kickAngle = defaultKickAngle;
     }
 
+    public void DropBall()
+    {
+        isCatched = false;
+        ball.transform.SetParent(null);
+        ballRigidbody.isKinematic = false;
+
+        ballRigidbody.AddForce(new Vector3(0f, 1f, 0f));
+    }
+
 
     // private void OnIsCatchedChanged(bool oldValue, bool newValue)
     // {

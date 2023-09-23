@@ -121,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Sprint()
     {
-        if (unitAction.force > 700 && stamina > 0)
+        if (unitAction.type == UnitAction.Types.RUN && unitAction.force > 700 && stamina > 0)
         {
             timeSinceSprint = 0;
             canHeal = false;
@@ -177,29 +177,6 @@ public class PlayerMovement : MonoBehaviour
         else if (movementSpeed == walkSpeed)
         {
             animator.SetFloat("speed", 0.4f);
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        // Handle score triggering logic here if needed.
-        if (other.CompareTag("RedTrigger") && GetComponent<CatchBall>().isCatched == true && gameObject.tag == "BluePlayer")
-        {
-            if (canAdd)
-            {
-                gameManager.GetComponent<GoalSystem>().BlueScore += 5;
-                canAdd = false;
-                StartCoroutine(DoAddPoints());
-            }
-        }
-        else if (other.CompareTag("BlueTrigger") && GetComponent<CatchBall>().isCatched == true && gameObject.tag == "RedPlayer")
-        {
-            if (canAdd)
-            {
-                gameManager.GetComponent<GoalSystem>().RedScore += 5;
-                canAdd = false;
-                StartCoroutine(DoAddPoints());
-            }
         }
     }
 

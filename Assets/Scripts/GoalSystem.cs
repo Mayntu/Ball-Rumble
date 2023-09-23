@@ -20,9 +20,9 @@ public class GoalSystem : MonoBehaviour
     [SerializeField] private TMP_Text blueTeamScore;
     [SerializeField] private TMP_Text redTeamScore;
 
-    void Start()
+    private void Start()
     {
-        
+        UpdateUI();
     }
     void Update()
     {
@@ -30,7 +30,7 @@ public class GoalSystem : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        UpdateUI();
+        // UpdateUI();
     }
     public void UpdateUI()
     {
