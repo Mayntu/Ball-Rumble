@@ -16,6 +16,7 @@ public class TournamentController : MonoBehaviour {
     private uint updatesCount = 0;
     private TournamentPlayer[] teams = null;
     private UnitInfoCollection objectsInfo = new();
+    private string[] teamNames = { "Red", "Blue" };
 
 
 
@@ -100,6 +101,15 @@ public class TournamentController : MonoBehaviour {
     }
 
 
+    public void setPlayerName(int i,  string name) {
+        if (!string.IsNullOrEmpty(name) && 0 <= i && i < teamNames.Length) {
+            teamNames[i] = name;
+        }
+    }
+
+    public string getPlayerName(int i) {
+        return teamNames[i];
+    }
 
     private void createObjectsInfo() {
         // размер массива в objectsInfo: количество команд * юнитов в команде + мяч + 4 штанги
@@ -127,7 +137,7 @@ public class TournamentController : MonoBehaviour {
 
     private void createTestPlayers() {
         for (int i = 0; i < totalTeams; i++) {
-            string playerName = (i == 0) ? "RedPlayer" : "BluePlayer";
+            string playerName = teamNames[i] + "Player";
             string playerHost = "127.0.0.1";
             int playerPort = 8201 + i;
             TeamInfo client = new(i, playerName, playerHost, playerPort);
