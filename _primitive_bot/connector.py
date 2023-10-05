@@ -5,11 +5,12 @@ import json
 class GameConnector:
     PORT = 8201
 
-    def __init__(self, logic_function: callable(list)):
+    def __init__(self, logic_function):
         self.process = logic_function
         self.port = self.PORT
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.started = False
+        self.team_name = ''
         bind_ok = False
         while not bind_ok:
             try:
@@ -29,10 +30,16 @@ class GameConnector:
                 request = json.loads(str(object=data, encoding='utf-8'))
             except ValueError:
                 pass
-
             # print("\nGot request: ", request)
-            if 'actions' in request:
-                response_data = self.process(request['actions']['data'])
+
+            if 'ready' in request:
+                self.team_name = request['ready']['data']['teamName']
+                response_data = {'ready': 'ok'}
+            elif 'gameOver' in request:
+                self.started = False
+                response_data = {'gameOver': 'ok'}
+            elif 'actions' in request:
+                response_data = self.process(self.team_name, request['actions']['data'])
 
             response_str = json.dumps({'data': response_data})
             self.socket.sendto(bytes(response_str, 'utf-8'), address)
