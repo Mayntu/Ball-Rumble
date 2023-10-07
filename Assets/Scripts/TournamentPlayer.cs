@@ -1,22 +1,21 @@
 using UnityEngine;
-using System.Linq;
 
 public class TournamentPlayer {
     private TeamInfo player; 
     private TeamConnector client;
+    public bool ready {  get; private set; }
 
     public TournamentPlayer(TeamInfo player) {
         this.player = player;
         this.client = new TeamConnector(player.host, player.port);
     }
-    public void requestActions(UnitInfoCollection units) {
-        string data = JsonUtility.ToJson(units);
-        //Debug.Log("requestActions(" + data + ")");
-        client.sendRequest(TeamConnector.Requests.ACTIONS, data, actionsReceiver);
-    }
 
     public string playerName() {
         return player.name;
+    }
+
+    public string playerTag() {
+        return player.tag;
     }
 
     public int playerId() {
@@ -24,31 +23,48 @@ public class TournamentPlayer {
     }
 
     public string info() {
-        string template = "Client {0} '{1}', on {2}:{3}";
-        return string.Format(template, player.id, player.name, player.host, player.port);
+        return $"Client {player.id} '{player.name}', on {player.host}:{player.port}";
     }
 
-    private bool isInMyTeam(int id) {
-        //Debug.Log("Searching " + id.ToString());
-        GameObject obj = GameObject.Find(id.ToString());
-        if (obj != null) {
-            //Debug.Log("Object found");
-            return obj.CompareTag(player.name);
+
+    public void requestActions(UnitInfoCollection units) {
+        if (!ready) {
+            Debug.LogError($"TournamentPlayer.requestActions(): Player {player.id} not ready!");
+            return;
         }
-        //Debug.Log("Object NULL");
-        return false;
+        string data = JsonUtility.ToJson(units);
+        client.sendRequest(TeamConnector.Requests.ACTIONS, data, actionsReceiver);
     }
 
+    public void requestReady() {
+        string data = "{" + "\"data\": {\"teamName\": \"%player.tag%\"}" + "}";
+        data = data.Replace("%player.tag%", player.tag);
+        client.sendRequest(TeamConnector.Requests.READY, data, readyReceiver);
+    }
+
+    public void requestGameOver() {
+        if (!ready) {
+            Debug.LogError($"TournamentPlayer.requestGameOver(): Player {player.id} not ready!");
+            return;
+        }
+        string data = "{" + "\"data\": {}" + "}";
+        client.sendRequest(TeamConnector.Requests.GAMEOVER, data, null);
+    }
+
+
+
+    private void readyReceiver(string data) {
+        if (data.Contains("ok"))  { ready = true; }
+        TournamentController.Instance.playerReadyHandler(player.id);
+    }
 
     private void actionsReceiver(string data) {
         //Debug.Log("Received: " + data);
         UnitActionCollection res = JsonUtility.FromJson<UnitActionCollection>(data);
-        TournamentController.Instance.Enqueue(() => {
-            UnitActionCollection myActions = new();
-            myActions.data = res.data.Where((unit) => isInMyTeam(unit.id)).ToArray();
-            //Debug.Log("MyActions (" + myActions.data.Length.ToString() + "): " + JsonUtility.ToJson(myActions));
-            TournamentController.Instance.refreshUnitActions(player.id, myActions);
-        });
+        TournamentController.Instance.playerActionsHandler(player.id, res);
+    }
 
+    private void gameoverReceiver(string data) {
+        TournamentController.Instance.playerGameOverHandler(player.id);
     }
 }

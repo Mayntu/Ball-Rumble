@@ -2,13 +2,15 @@ using System;
 using UnityEngine;
 
 public class UnitAction : MonoBehaviour {
-    public enum Types {
-        NONE,
-        RUN,
-        THROW,
-        KICK,
-        JUMP
+    public enum Types { NONE, RUN, THROW, KICK, JUMP };
+    public static string[] names = new[] { "none", "run", "throw", "kick", "jump" };
+
+    public static Types TypeFromString(string actionTypeName) {
+        int action_index = Array.IndexOf(names, actionTypeName);
+        if (action_index != -1) return (Types)action_index;
+        else return Types.NONE;
     }
+
 
     public Types type = Types.NONE;
     public uint force = 0;
@@ -23,8 +25,10 @@ public class UnitAction : MonoBehaviour {
         this.verticalAngle = verticalAngle;
     }
 
+    public void set(string actionTypeName, uint actionForce, double relativeDirection = 0, double verticalAngle = 0) {
+        set(TypeFromString(actionTypeName), actionForce, relativeDirection, verticalAngle);
+    }
 }
-
 
 [Serializable]
 public class UnitActionRecord {
