@@ -226,14 +226,14 @@ public class CatchBall : MonoBehaviour
             animator.Play("Knocked");
             isCatched = false;
             ball.GetComponent<Rigidbody>().AddForce(new Vector3(0f, 5f, 0f), ForceMode.Force);
-            StartCoroutine(gameObject.GetComponent<PlayerMovement>().DoMoveFalse(2.5f));
+            StartCoroutine(gameObject.GetComponent<PlayerMovement>().DoPlayerFall(2.5f));
         }
         if (col.gameObject.tag == "RedPlayer" && gameObject.tag == "BluePlayer" && isCatched)
         {
             animator.Play("Knocked");
             isCatched = false;
             ball.GetComponent<Rigidbody>().AddForce(new Vector3(0f, 5f, 0f), ForceMode.Force);
-            StartCoroutine(gameObject.GetComponent<PlayerMovement>().DoMoveFalse(2.5f));
+            StartCoroutine(gameObject.GetComponent<PlayerMovement>().DoPlayerFall(2.5f));
         }
     }
     

@@ -186,6 +186,14 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         canMove = true;
     }
+    public IEnumerator DoPlayerFall(float seconds)
+    {
+        canMove = false;
+        rb.mass += 100;
+        yield return new WaitForSeconds(seconds);
+        rb.mass -= 100;
+        canMove = true;
+    }
 
     private bool canAdd = true;
 
