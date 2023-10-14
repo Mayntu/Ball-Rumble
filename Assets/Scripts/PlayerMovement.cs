@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public int GetStamina { get { return stamina; } }
+    public int SetStamina { set { stamina = value; } }
+
     [SerializeField] private float movementSpeed;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float jumpForce;
