@@ -15,17 +15,13 @@ public class SideOutController : MonoBehaviour
     private bool isOut = false;
     private Vector3 OutEntry;
 
-    void Start()
-    {
-
-    }
 
     void Update()
     {
         if (isOut)
         {
-            Vector3 DirectionToCenter = (Vector3.zero - ball.transform.position).normalized;
-            outThrowForce = Random.Range(12f, 18f);
+            Vector3 DirectionToCenter = (new Vector3(0, 40, 0) - ball.transform.position).normalized;
+            outThrowForce = Random.Range(20f, 25f);
             ball.GetComponent<Rigidbody>().AddForce(DirectionToCenter * outThrowForce, ForceMode.Impulse);
 
             isOut = false;
@@ -58,6 +54,7 @@ public class SideOutController : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         ball.GetComponent<Rigidbody>().isKinematic = false;
+        ballTrail.SetActive(true);
         isOut = true;
     }
 }

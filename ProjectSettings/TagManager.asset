@@ -15,6 +15,8 @@ TagManager:
   - SpawnRedPlayer
   - NamesManager
   - GoalPost
+  - LeftInsideOut
+  - RightInsideOut
   layers:
   - Default
   - TransparentFX
