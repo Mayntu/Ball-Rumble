@@ -15,7 +15,7 @@ public class TournamentController : MonoBehaviour {
        Иначе игра упадёт с NullReferenceException */
 
     private uint updatesCount = 0;
-    private GameArguments arguments;
+    private CliManager cli;
     private TournamentPlayer[] teams = null;
     private UnitInfoCollection objectsInfo = new();
     private struct TagName { public string tag; public string name; }
@@ -42,7 +42,7 @@ public class TournamentController : MonoBehaviour {
             return;
         }
         instance = this;
-        arguments = new GameArguments();
+        cli = new CliManager();
         teams = new TournamentPlayer[totalTeams];
     }
 
@@ -91,6 +91,10 @@ public class TournamentController : MonoBehaviour {
                 executionQueue.Dequeue().Invoke();
             }
         }
+    }
+
+    public bool isServerSide() {
+        return cli.teamsConfigured() >= totalTeams;
     }
 
 
