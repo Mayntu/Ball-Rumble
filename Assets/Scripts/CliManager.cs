@@ -14,4 +14,8 @@ public class CliManager {
     }
 
     public int teamsConfigured() { return teams.Count; }
+
+    public string getTeamConfigById(int id)  {
+        return teams[id]; //TODO: сделать поиск в элементах списка по шаблону regexp
+    }
 }

@@ -1,5 +1,6 @@
 
 using System;
+using UnityEngine;
 
 [Serializable]
 public class TeamInfo {
@@ -17,4 +18,13 @@ public class TeamInfo {
         this.port = port;
     }
 
+    public bool update(string jsonconfig) {
+        try {
+            JsonUtility.FromJsonOverwrite(jsonconfig, this);
+        }
+        catch { 
+            return false;
+        }
+        return true;
+    }
 }
