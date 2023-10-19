@@ -15,6 +15,7 @@ public class TournamentController : MonoBehaviour {
        Иначе игра упадёт с NullReferenceException */
 
     private uint updatesCount = 0;
+    private GameArguments arguments;
     private TournamentPlayer[] teams = null;
     private UnitInfoCollection objectsInfo = new();
     private struct TagName { public string tag; public string name; }
@@ -41,6 +42,7 @@ public class TournamentController : MonoBehaviour {
             return;
         }
         instance = this;
+        arguments = new GameArguments();
         teams = new TournamentPlayer[totalTeams];
     }
 

@@ -1,4 +1,7 @@
 
+using System;
+
+[Serializable]
 public class TeamInfo {
     public int id;
     public string tag;
