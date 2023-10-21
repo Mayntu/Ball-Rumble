@@ -8,48 +8,56 @@ public class UnitInfo {
     public Vector3 position;
     public UnitSize size;
     public float stamina;
-    public bool hasBall;
+    public string feature;
+
 
     public UnitInfo(GameObject unit) {
         id = unit.GetInstanceID();
         unit.name = id.ToString();
         tag = unit.tag;
-        position = unit.transform.position;
-        CatchBall ball = unit.GetComponent<CatchBall>();
-        hasBall = (ball != null) && ball.isCatched;
         size = new UnitSize();
-        CapsuleCollider collider = unit.GetComponent<CapsuleCollider>();
-        size.height = (collider != null) ? collider.height : 0;
-        size.radius = (collider != null) ? collider.radius : 0;
-        PlayerMovement movement = unit.GetComponent<PlayerMovement>();
-        stamina = (movement != null) ? movement.stamina : 0;
+        feature = "";
+        refresh(unit);
     }
+
 
     public UnitInfo(UnitInfo other) {
         id = other.id;
         tag = other.tag;
         position = new(other.position.x, other.position.y, other.position.z);
         size = new UnitSize(other.size.height, other.size.radius);
-        hasBall = other.hasBall;
+        feature = other.feature;
     }
+
 
     public void mirror() {
         position.x *= -1;
         position.z *= -1;
     }
 
-    public void refresh() {
-        GameObject obj = GameObject.Find(id.ToString());
+
+    public void refresh(GameObject obj = null) {
+        if (obj == null) {
+            obj = GameObject.Find(id.ToString());
+            if (obj == null) return;
+        }
+
         position = obj.transform.position;
         CatchBall ball = obj.GetComponent<CatchBall>();
-        hasBall = (ball != null) && ball.isCatched;
+        if (ball != null) {
+            feature = ball.isCatched ? "hasBall" : feature;
+        }
         CapsuleCollider collider = obj.GetComponent<CapsuleCollider>();
-        size.height = (collider != null) ? collider.height : 0;
-        size.radius = (collider != null) ? collider.radius : 0;
+        if (collider != null) {
+            size.height = collider.height;
+            size.radius = collider.radius;
+        }
         PlayerMovement movement = obj.GetComponent<PlayerMovement>();
-        stamina = (movement != null) ? movement.stamina : 0;
+        if (movement != null) {
+            stamina = movement.stamina;
+            feature = movement.isFallen ? "fallen" : feature;
+        }
     }
-
 }
 
 
