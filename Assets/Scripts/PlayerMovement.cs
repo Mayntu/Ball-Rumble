@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private float timeSinceSprint;
     
     public bool canMove = true;
+    public bool isFallen { get; private set; } = false;
 
     private UnitAction unitAction;
 
@@ -189,10 +190,12 @@ public class PlayerMovement : MonoBehaviour
     public IEnumerator DoPlayerFall(float seconds)
     {
         canMove = false;
+        isFallen = true;
         rb.mass += 100;
         yield return new WaitForSeconds(seconds);
         rb.mass -= 100;
         canMove = true;
+        isFallen = false;
     }
 
     private bool canAdd = true;
