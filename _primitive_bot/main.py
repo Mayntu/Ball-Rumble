@@ -14,7 +14,7 @@ def main_logic(team_name, game_objects):
 	my_team = tuple(filter(lambda x: x['tag'] == team_name, units))     		# мои юниты
 
 	for u in my_team:
-		if u['hasBall'] is True:
+		if u['feature'] == "hasBall":
 			act = {'id': u['id'], 'type': 'run', 'force': 1000, 'direction': 0, 'angle': 0}
 		else:
 			act = {'id': u['id'], 'type': 'run', 'force': 500, 'direction': hlp.direction(u['position'], ball['position']), 'angle': 0}
