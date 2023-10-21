@@ -16,6 +16,7 @@ public class TournamentController : MonoBehaviour {
 
     private uint updatesCount = 0;
     private CliManager cli;
+    private bool updatedByCli = false;
     private TournamentPlayer[] teams = null;
     private UnitInfoCollection objectsInfo = new();
     private struct TagName { public string tag; public string name; }
@@ -94,7 +95,8 @@ public class TournamentController : MonoBehaviour {
     }
 
     public bool isServerSide() {
-        return cli.teamsConfigured() >= totalTeams;
+        //return cli.teamsConfigured() >= totalTeams;
+        return updatedByCli;
     }
 
 
@@ -199,7 +201,7 @@ public class TournamentController : MonoBehaviour {
             string playerHost = "127.0.0.1";
             int playerPort = 8201 + i;
             TeamInfo client = new(i, playerTag, playerName, playerHost, playerPort);
-            client.update(cli.getTeamConfigById(i));
+            updatedByCli |= client.update(cli.getTeamConfigById(i));
             teams[i] = new TournamentPlayer(client);
             unitsInTeam = (uint) GameObject.FindGameObjectsWithTag(playerTag).Length;
         }
