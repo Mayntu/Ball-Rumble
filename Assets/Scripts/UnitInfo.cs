@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -8,15 +9,15 @@ public class UnitInfo {
     public Vector3 position;
     public UnitSize size;
     public float stamina;
-    public string feature;
+    public List<string> features;
 
 
     public UnitInfo(GameObject unit) {
         id = unit.GetInstanceID();
         unit.name = id.ToString();
         tag = unit.tag;
-        size = new UnitSize();
-        feature = "";
+        size = new();
+        features = new();
         refresh(unit);
     }
 
@@ -26,7 +27,7 @@ public class UnitInfo {
         tag = other.tag;
         position = new(other.position.x, other.position.y, other.position.z);
         size = new UnitSize(other.size.height, other.size.radius);
-        feature = other.feature;
+        features = other.features;
     }
 
 
@@ -41,11 +42,11 @@ public class UnitInfo {
             obj = GameObject.Find(id.ToString());
             if (obj == null) return;
         }
-
+        features.Clear();
         position = obj.transform.position;
         CatchBall ball = obj.GetComponent<CatchBall>();
         if (ball != null) {
-            feature = ball.isCatched ? "hasBall" : feature;
+            if (ball.isCatched) features.Add("ball");
         }
         CapsuleCollider collider = obj.GetComponent<CapsuleCollider>();
         if (collider != null) {
@@ -55,7 +56,8 @@ public class UnitInfo {
         PlayerMovement movement = obj.GetComponent<PlayerMovement>();
         if (movement != null) {
             stamina = movement.stamina;
-            feature = movement.isFallen ? "fallen" : feature;
+            if (movement.isFallen) features.Add("fallen");
+            if (!movement.isGrounded) features.Add("jumping");
         }
     }
 }

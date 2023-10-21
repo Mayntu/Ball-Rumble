@@ -19,16 +19,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private int kickAngleRange;
 
     private bool canHeal;
-    private bool isGrounded;
     private bool isJumping;
     private Rigidbody rb;
     private Animator animator;
     private float horizontalInput;
     private float verticalInput;
     private float timeSinceSprint;
-    
-    public bool canMove = true;
+
+    public bool isGrounded { get; private set; }
     public bool isFallen { get; private set; } = false;
+    public bool canMove = true;
+    
 
     private UnitAction unitAction;
 
