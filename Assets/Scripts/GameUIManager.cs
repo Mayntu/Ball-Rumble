@@ -31,6 +31,7 @@ public class GameUIManager : MonoBehaviour
         {
             currentTime = 0f;
             pausePanel.SetActive(true);
+            gameObject.GetComponent<VideoRecorder>.StopCapture();
             Time.timeScale = 0f;
         }
 
