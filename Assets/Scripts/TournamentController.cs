@@ -151,6 +151,17 @@ public class TournamentController : MonoBehaviour {
     }
 
 
+    public void playerFailedHandler(int team_id) {
+        enqueue(() => {
+            GameUIManager gameui = GameObject.Find("GameManager").GetComponent<GameUIManager>();
+            if (gameui != null) {
+                string er = $"Player '{teamNames[team_id].name}': {teams[team_id].errorDescription}";
+                gameui.GameOver(er);
+            }
+        });
+    }
+
+
 
     private void enqueue(Action action) {
         lock (executionQueue) {

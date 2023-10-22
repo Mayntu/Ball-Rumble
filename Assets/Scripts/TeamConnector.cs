@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 
 public class TeamConnector {
+    public delegate void ResponseHandler(string data);
     public class Requests {
         public static readonly string READY     = "ready";
         public static readonly string ACTIONS   = "actions";
@@ -15,6 +16,8 @@ public class TeamConnector {
     private int port;
     private UdpClient udp;
     private IPEndPoint endpoint;
+    private string waitingForResponseType = "";
+    private ResponseHandler errorHandler;
 
     public TeamConnector(string host, int port) {
         this.host = host;
@@ -26,7 +29,10 @@ public class TeamConnector {
     }
 
 
-    public delegate void ResponseHandler(string data);
+    public void setErrorHandler(ResponseHandler errorHandler) { 
+        this.errorHandler = errorHandler;
+    }
+
 
     // sendRequest:
     // @reqType is one of static string constants of Requests class
@@ -34,18 +40,24 @@ public class TeamConnector {
         void receiver(IAsyncResult a_res) {
             byte[] buffer = udp.EndReceive(a_res, ref endpoint);
             if (buffer != null) {
+                waitingForResponseType = "";
                 string response = Encoding.UTF8.GetString(buffer);
                 if (responseHandler != null) {
                     responseHandler(response);
                 }
             }
         }
-        if (data == "") {
-            data = "\"\"";
+
+        if (reqType == waitingForResponseType && reqType == Requests.ACTIONS) {
+            errorHandler("disconnected or processing actions too long");
+            return;
         }
+
+        if (data == "") data = "\"\"";
         data = "{\"" + reqType + "\": " + data + "}";
         if (send(data)) {
             //Debug.Log("UDP data out: " + data);
+            waitingForResponseType = reqType;
             udp.BeginReceive(new AsyncCallback(receiver), null);
         }
     }

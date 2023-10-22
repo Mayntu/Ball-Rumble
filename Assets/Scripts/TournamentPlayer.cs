@@ -9,6 +9,7 @@ public class TournamentPlayer {
     public TournamentPlayer(TeamInfo player) {
         this.player = player;
         this.client = new TeamConnector(player.host, player.port);
+        this.client.setErrorHandler(errorReceiver);
     }
 
     public string playerName() {
@@ -72,5 +73,10 @@ public class TournamentPlayer {
 
     private void gameoverReceiver(string data) {
         TournamentController.Instance.playerGameOverHandler(player.id);
+    }
+
+    private void errorReceiver(string description) {
+        errorDescription = description;
+        TournamentController.Instance.playerFailedHandler(player.id);
     }
 }
