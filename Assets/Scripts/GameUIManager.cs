@@ -11,6 +11,8 @@ public class GameUIManager : MonoBehaviour
 
     private float currentTime;
 
+    public bool canDecrease = false;
+
     // public Text blueTeamName;
     // public Text redTeamName;
     // public Text score;
@@ -27,20 +29,23 @@ public class GameUIManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        currentTime -= Time.fixedDeltaTime;
-        if (currentTime < 0f)
+        if (canDecrease)
         {
-            currentTime = 0f;
-            GameOver();
-            // gameObject.GetComponent<VideoRecorder>.StopCapture();
+            currentTime -= Time.fixedDeltaTime;
+            if (currentTime < 0f)
+            {
+                currentTime = 0f;
+                GameOver();
+                // gameObject.GetComponent<VideoRecorder>.StopCapture();
+            }
+
+            int minutes = Mathf.FloorToInt(currentTime / 60f);
+
+            int seconds = Mathf.FloorToInt(currentTime % 60f);
+            string timeString = string.Format("{0:00}:{1:00}", minutes, seconds);
+
+            timerText.text = timeString;
         }
-
-        int minutes = Mathf.FloorToInt(currentTime / 60f);
-
-        int seconds = Mathf.FloorToInt(currentTime % 60f);
-        string timeString = string.Format("{0:00}:{1:00}", minutes, seconds);
-
-        timerText.text = timeString;
 
         // score.text = scoreManager.GetComponent<GoalSystem>().RedScore.ToString() + ":" + scoreManager.GetComponent<GoalSystem>().BlueScore.ToString();
 
