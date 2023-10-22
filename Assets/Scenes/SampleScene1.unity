@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4473669, g: 0.4973035, b: 0.5752459, a: 1}
+  m_IndirectSpecularColor: {r: 0.4473667, g: 0.4973032, b: 0.5752455, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3950,14 +3950,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 848004471}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05d9ed4cdfe5230419917b94b8cbebd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 0}
   startTime: 180
-  pausePanel: {fileID: 0}
+  pausePanel: {fileID: 1289464427}
+  tc: {fileID: 1096754238}
   errorTextObject: {fileID: 0}
   canDecrease: 0
 --- !u!4 &848004473
@@ -4728,6 +4729,7 @@ MonoBehaviour:
   timerText: {fileID: 671772475}
   startTime: 120
   pausePanel: {fileID: 1289464427}
+  tc: {fileID: 0}
   errorTextObject: {fileID: 664805360}
   canDecrease: 0
 --- !u!114 &1019375101

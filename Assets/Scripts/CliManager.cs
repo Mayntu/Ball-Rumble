@@ -1,6 +1,7 @@
 using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System;
 using UnityEngine;
 
 public class CliManager {
@@ -31,6 +32,11 @@ public class CliManager {
         return "";
     }
 
+    public void echo(string text) {
+        Debug.Log("cout << " + text);
+        Console.WriteLine(text);
+    }
+
     private void test() {
         teams.Add("{\"id\": 0, \"name\": \"Foo\"}");
         teams.Add("{\"id\": 1, \"name\": \"Bar\"}");
@@ -41,4 +47,5 @@ public class CliManager {
         Debug.Log($"Gonfigured team1: {t1}");
         teams.Clear();
     }
+
 }

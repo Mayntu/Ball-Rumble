@@ -4,6 +4,7 @@ public class TournamentPlayer {
     private TeamInfo player; 
     private TeamConnector client;
     public bool ready {  get; private set; }
+    public string errorDescription { get; private set; } = "";
 
     public TournamentPlayer(TeamInfo player) {
         this.player = player;
@@ -25,6 +26,7 @@ public class TournamentPlayer {
     public int playerPort() {
         return player.port;
     }
+
 
     public string info() {
         return $"Client {player.id} '{player.name}', on {player.host}:{player.port}";

@@ -79,13 +79,6 @@ public class TournamentController : MonoBehaviour {
     }
 
 
-    void OnDestroy() {
-        foreach (TournamentPlayer player in teams) {
-            player.requestGameOver();
-        }
-    }
-
-
     void Update() {
         lock (executionQueue) {
             while (executionQueue.Count > 0) {
@@ -94,9 +87,23 @@ public class TournamentController : MonoBehaviour {
         }
     }
 
+
+    public void onGameOver() {
+        TournamentResult result = new(teams);
+        GoalSystem goals = GameObject.Find("GameManager").GetComponent<GoalSystem>();
+        foreach (TournamentPlayer player in teams) {
+            int id = player.playerId();
+            result.setError(id, player.errorDescription);
+            result.setScore(id, goals.GetScore(id));
+            player.requestGameOver();
+        }
+        cli.echo($"RESULTS: {result.toJson()}");
+    }
+
+
     public bool isServerSide() {
         bool r = updatedByCli && cli.teamsConfigured() >= totalTeams;
-        if (r) Debug.Log("RUNNING ON SERVER SIDE");
+        if (r) cli.echo("RUNNING ON SERVER SIDE");
         return r;
     }
 

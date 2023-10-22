@@ -37,13 +37,13 @@ public class GoalSystem : MonoBehaviour
         blueTeamScore.SetText(blueScore.ToString());
         redTeamScore.SetText(redScore.ToString());
     }
-    public int GetScore(string team)
+    public int GetScore(int teamId)
     {
-        if (team == "blue")
+        if (teamId == 0)
         {
             return blueScore;
         }
-        else if (team == "red")
+        else if (teamId == 1)
         {
             return redScore;
         }

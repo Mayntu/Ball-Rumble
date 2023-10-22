@@ -7,6 +7,7 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private float startTime;
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject tc;
     [SerializeField] private TMP_Text errorTextObject;
 
     private float currentTime;
@@ -61,6 +62,8 @@ public class GameUIManager : MonoBehaviour
     }
     public void GameOver(string errorText = "")
     {
+        tc = GameObject.Find("Tournament");
+        tc.GetComponent<TournamentController>().onGameOver();
         pausePanel.SetActive(true);
         Time.timeScale = 0f;
         errorTextObject.text = errorText;
