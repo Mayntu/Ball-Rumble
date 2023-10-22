@@ -29,8 +29,8 @@ public class StartMenu : MonoBehaviour
         leftPlayerNick.text = tc.GetComponent<TournamentController>().getPlayerName(0);
         rightPlayerNick.text = tc.GetComponent<TournamentController>().getPlayerName(1);
 
-        // leftPlayerPort.text = tc.GetComponent<TournamentController>().getPlayerPort(0);
-        // rightPlayerPort.text = tc.GetComponent<TournamentController>().getPlayerPort(1);
+        // leftPlayerPort.text = tc.GetComponent<TournamentController>().getPlayerPort(0).ToString();
+        // rightPlayerPort.text = tc.GetComponent<TournamentController>().getPlayerPort(1).ToString();
     }
 
     private void FixedUpdate()
