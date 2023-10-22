@@ -17,6 +17,8 @@ public class StartMenu : MonoBehaviour
 
     [SerializeField] private GameObject tc;
 
+    private bool isPortSetted = false;
+
     private void Start()
     {
         // PauseGame();
@@ -29,8 +31,7 @@ public class StartMenu : MonoBehaviour
         leftPlayerNick.text = tc.GetComponent<TournamentController>().getPlayerName(0);
         rightPlayerNick.text = tc.GetComponent<TournamentController>().getPlayerName(1);
 
-        // leftPlayerPort.text = tc.GetComponent<TournamentController>().getPlayerPort(0).ToString();
-        // rightPlayerPort.text = tc.GetComponent<TournamentController>().getPlayerPort(1).ToString();
+        
     }
 
     private void FixedUpdate()
@@ -42,6 +43,23 @@ public class StartMenu : MonoBehaviour
         if (tc.GetComponent<TournamentController>().isPlayerReady(1))
         {
             rightPlayerNotReady.gameObject.SetActive(false);
+        }
+        if (isPortSetted)
+        {
+            return;
+        }
+        else
+        {
+            try
+            {
+                leftPlayerPort.text = tc.GetComponent<TournamentController>().getPlayerPort(0).ToString();
+                rightPlayerPort.text = tc.GetComponent<TournamentController>().getPlayerPort(1).ToString();
+                isPortSetted = true;
+            }
+            catch
+            {
+                return;
+            }
         }
     }
     public void StartGame()
