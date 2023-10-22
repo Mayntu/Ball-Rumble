@@ -540,8 +540,8 @@ MonoBehaviour:
   isYellow: 0
   isPurple: 0
   isBlack: 0
-  isWhite: 0
-  isPink: 1
+  isWhite: 1
+  isPink: 0
   animator: {fileID: 0}
   redAvatar: {fileID: 9000000, guid: 10ad8a4603ab71c4f9a973006f76dd64, type: 3}
   blueAvatar: {fileID: 9000000, guid: 2f3acd638fb8271419fe962f8036c008, type: 3}
