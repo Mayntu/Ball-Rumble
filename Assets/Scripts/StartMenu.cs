@@ -21,15 +21,33 @@ public class StartMenu : MonoBehaviour
         if (tc.GetComponent<TournamentController>().isServerSide())
         {
             startServerButton.SetActive(false);
+            StartGame();
+            // Начать запись видео
         }
-        
-        // MenuPlayer leftPlayer = MenuPlayer();
-        // MenuPlayer rightPlayer = MenuPlayer();
+        leftPlayerNick.text = tc.GetComponent<TournamentController>().getPlayerName(0);
+        rightPlayerNick.text = tc.GetComponent<TournamentController>().getPlayerName(1);
+
+        // leftPlayerPort.text = tc.GetComponent<TournamentController>().getPlayerPort(0);
+        // rightPlayerPort.text = tc.GetComponent<TournamentController>().getPlayerPort(1);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-          
+        if (tc.GetComponent<TournamentController>().isPlayerReady(0))
+        {
+            leftPlayerReady.gameObject.SetActive(true);
+        }
+        if (tc.GetComponent<TournamentController>().isPlayerReady(1))
+        {
+            rightPlayerReady.gameObject.SetActive(true);
+        }
+    }
+    public void StartGame()
+    {
+        if (tc.GetComponent<TournamentController>().isPlayerReady(0) && tc.GetComponent<TournamentController>().isPlayerReady(1))
+        {
+            ResumeGame();
+        }
     }
     public void PauseGame()
     {
@@ -38,10 +56,5 @@ public class StartMenu : MonoBehaviour
     public void ResumeGame()
     {
         Time.timeScale = 1f;
-    }
-    public class MenuPlayer
-    {
-        public Image readyImage, notReadyImage;
-        public TMP_Text nickname, port;
     }
 }

@@ -7,6 +7,7 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private float startTime;
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private TMP_Text errorTextObject;
 
     private float currentTime;
 
@@ -30,9 +31,8 @@ public class GameUIManager : MonoBehaviour
         if (currentTime < 0f)
         {
             currentTime = 0f;
-            pausePanel.SetActive(true);
-            gameObject.GetComponent<VideoRecorder>.StopCapture();
-            Time.timeScale = 0f;
+            GameOver();
+            // gameObject.GetComponent<VideoRecorder>.StopCapture();
         }
 
         int minutes = Mathf.FloorToInt(currentTime / 60f);
@@ -53,5 +53,11 @@ public class GameUIManager : MonoBehaviour
         // {
         //     redTeamName.text = PlayerPrefs.GetString("RedName");
         // }
+    }
+    public void GameOver(string errorText = "")
+    {
+        pausePanel.SetActive(true);
+        Time.timeScale = 0f;
+        errorTextObject.text = errorText;
     }
 }
