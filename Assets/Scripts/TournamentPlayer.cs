@@ -22,6 +22,10 @@ public class TournamentPlayer {
         return player.id;
     }
 
+    public int playerPort() {
+        return player.port;
+    }
+
     public string info() {
         return $"Client {player.id} '{player.name}', on {player.host}:{player.port}";
     }

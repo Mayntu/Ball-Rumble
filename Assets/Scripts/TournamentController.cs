@@ -95,8 +95,9 @@ public class TournamentController : MonoBehaviour {
     }
 
     public bool isServerSide() {
-        //return cli.teamsConfigured() >= totalTeams;
-        return updatedByCli;
+        bool r = updatedByCli && cli.teamsConfigured() >= totalTeams;
+        if (r) Debug.Log("RUNNING ON SERVER SIDE");
+        return r;
     }
 
 
@@ -109,6 +110,10 @@ public class TournamentController : MonoBehaviour {
 
     public string getPlayerName(int i) {
         return teamNames[i].name;
+    }
+
+    public int getPlayerPort(int i) {
+        return teams[i].playerPort();
     }
 
 
