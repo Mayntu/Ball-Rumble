@@ -4762,6 +4762,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47744d31cfe50844f98eacc6f39d32ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startMenuPanel: {fileID: 2092539623}
   startServerButton: {fileID: 88581853}
   leftPlayerReady: {fileID: 1394216282}
   leftPlayerNotReady: {fileID: 1678241483}
@@ -5722,7 +5723,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1289464428
 RectTransform:
   m_ObjectHideFlags: 0

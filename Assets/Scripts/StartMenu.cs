@@ -6,6 +6,7 @@ using TMPro;
 
 public class StartMenu : MonoBehaviour
 {
+    [SerializeField] private GameObject startMenuPanel;
     [SerializeField] private GameObject startServerButton;
     
     [SerializeField] private Image leftPlayerReady, leftPlayerNotReady;
@@ -18,6 +19,7 @@ public class StartMenu : MonoBehaviour
 
     private void Start()
     {
+        // PauseGame();
         if (tc.GetComponent<TournamentController>().isServerSide())
         {
             startServerButton.SetActive(false);
@@ -35,11 +37,11 @@ public class StartMenu : MonoBehaviour
     {
         if (tc.GetComponent<TournamentController>().isPlayerReady(0))
         {
-            leftPlayerReady.gameObject.SetActive(true);
+            leftPlayerNotReady.gameObject.SetActive(false);
         }
         if (tc.GetComponent<TournamentController>().isPlayerReady(1))
         {
-            rightPlayerReady.gameObject.SetActive(true);
+            rightPlayerNotReady.gameObject.SetActive(false);
         }
     }
     public void StartGame()
@@ -56,5 +58,6 @@ public class StartMenu : MonoBehaviour
     public void ResumeGame()
     {
         Time.timeScale = 1f;
+        startMenuPanel.SetActive(false);
     }
 }
