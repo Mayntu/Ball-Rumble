@@ -180,6 +180,15 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetFloat("speed", 0.4f);
         }
+
+/*        if (gameObject.GetComponent<CatchBall>().isCatched)
+        {
+            animator.SetBool("isCatched", true);
+        }
+        else
+        {
+            animator.SetBool("isCatched", false);
+        }*/
     }
 
     public IEnumerator DoMoveFalse(float seconds)
