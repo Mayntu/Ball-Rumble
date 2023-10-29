@@ -25,7 +25,7 @@ public class StartMenu : MonoBehaviour
     {
         bluePlayers = GameObject.FindGameObjectsWithTag("BluePlayer");
         redPlayers = GameObject.FindGameObjectsWithTag("RedPlayer");
-        // PauseGame();
+        PauseGame();
         if (tc.GetComponent<TournamentController>().isServerSide())
         {
             startServerButton.SetActive(false);
