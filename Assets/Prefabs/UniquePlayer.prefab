@@ -537,9 +537,9 @@ MonoBehaviour:
   isRed: 0
   isBlue: 0
   isLightBlue: 0
-  isYellow: 0
+  isYellow: 1
   isPurple: 0
-  isBlack: 1
+  isBlack: 0
   isWhite: 0
   isPink: 0
   animator: {fileID: 0}

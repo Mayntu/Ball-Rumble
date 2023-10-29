@@ -71,6 +71,7 @@ public class VideoRecorder : MonoBehaviour
         m_RecorderController.StopRecording();
     }
 
+    // Метод для получения пути к файлу
     IEnumerator StopVideo()
     {
         Debug.Log("stopped");

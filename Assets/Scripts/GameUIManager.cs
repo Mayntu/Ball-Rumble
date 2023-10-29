@@ -67,5 +67,6 @@ public class GameUIManager : MonoBehaviour
         pausePanel.SetActive(true);
         Time.timeScale = 0f;
         errorTextObject.text = errorText;
+        // stop video recording with 1 seconds
     }
 }
