@@ -54,7 +54,7 @@ public class TournamentController : MonoBehaviour {
         createTestPlayers();
         createObjectsInfo();
         if (isServerSide()) {
-            readyTimer = new(checkAllReady, null, TimeSpan.FromSeconds(2), TimeSpan.Zero);
+            readyTimer = new(readyTimerHandler, null, TimeSpan.FromSeconds(2), TimeSpan.Zero);
         }
     }
     
@@ -103,6 +103,9 @@ public class TournamentController : MonoBehaviour {
             player.requestGameOver();
         }
         cli.echo($"RESULTS: {result.toJson()}");
+        if (isServerSide()) {
+            quitTimer = new(quitTimerHandler, null, TimeSpan.FromSeconds(2), TimeSpan.Zero);
+        }
     }
 
 
@@ -167,22 +170,18 @@ public class TournamentController : MonoBehaviour {
     }
 
 
-
-    private void enqueue(Action action) {
-        lock (executionQueue) {
-            executionQueue.Enqueue(action);
-        }
+    private void quitTimerHandler(object? _) {
+        enqueue(() => { Application.Quit(); });
     }
 
 
-    private void checkAllReady(object? _) {
+    private void readyTimerHandler(object? _) {
         enqueue(() => {
             foreach (var team in teams) {
                 if (!team.ready) {
                     int team_id = team.playerId();
-                    Debug.Log($"checkAllReady(): team {team_id} not ready");
                     GameUIManager gameui = GameObject.Find("GameManager").GetComponent<GameUIManager>();
-                    Debug.Log($"checkAllReady(): gameui = {gameui}");
+                    Debug.Log($"checkAllReady(): team {team_id} not ready, gameui = {gameui}");
                     if (gameui != null) {
                         string er = $"Player '{teamNames[team_id].name}': {teams[team_id].errorDescription}";
                         gameui.GameOver(er);
@@ -191,6 +190,14 @@ public class TournamentController : MonoBehaviour {
             }
         });
     }
+
+
+    private void enqueue(Action action) {
+        lock (executionQueue) {
+            executionQueue.Enqueue(action);
+        }
+    }
+
 
     private bool isATeamMember(int team_id, int unit_id) {
         GameObject obj = GameObject.Find(unit_id.ToString());
