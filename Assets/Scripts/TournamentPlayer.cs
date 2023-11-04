@@ -1,10 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TournamentPlayer {
     private TeamInfo player; 
     private TeamConnector client;
     public bool ready {  get; private set; }
-    public string errorDescription { get; private set; } = "";
+    public string errorDescription { get; private set; } = "not ready";
 
     public TournamentPlayer(TeamInfo player) {
         this.player = player;
@@ -61,12 +62,16 @@ public class TournamentPlayer {
 
 
     private void readyReceiver(string data) {
-        if (data.Contains("ok"))  { ready = true; }
-        TournamentController.Instance.playerReadyHandler(player.id);
+        if (data.Contains("ok")) { 
+            ready = true;
+            errorDescription = "";
+            TournamentController.Instance.playerReadyHandler(player.id);
+        }
     }
 
     private void actionsReceiver(string data) {
         //Debug.Log("Received: " + data);
+        errorDescription = "";
         UnitActionCollection res = JsonUtility.FromJson<UnitActionCollection>(data);
         TournamentController.Instance.playerActionsHandler(player.id, res);
     }

@@ -33,9 +33,11 @@ public class TournamentResult
 
     private int getWinnerId() {
         TeamResult[] goodTeams = teams.Where(team => team.error == "").ToArray();
-        int maxScore = goodTeams.Max(team => team.score);
-        TeamResult[] topTeams = goodTeams.Where(team => team.score == maxScore).ToArray();
-        if (topTeams.Length == 1) return topTeams[0].id;
+        if (goodTeams.Length > 0) {
+            int maxScore = goodTeams.Max(team => team.score);
+            TeamResult[] topTeams = goodTeams.Where(team => team.score == maxScore).ToArray();
+            if (topTeams.Length == 1) return topTeams[0].id;
+        }
         return -1;
     }
 }

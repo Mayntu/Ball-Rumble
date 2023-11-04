@@ -19,6 +19,8 @@ public class TournamentController : MonoBehaviour {
     private bool updatedByCli = false;
     private TournamentPlayer[] teams = null;
     private UnitInfoCollection objectsInfo = new();
+    private System.Threading.Timer quitTimer = null;
+    private System.Threading.Timer readyTimer = null;
     private struct TagName { public string tag; public string name; }
     private TagName[] teamNames = { 
         new TagName {tag="RedPlayer",  name="Red"},
@@ -51,6 +53,9 @@ public class TournamentController : MonoBehaviour {
     void Start() {
         createTestPlayers();
         createObjectsInfo();
+        if (isServerSide()) {
+            readyTimer = new(checkAllReady, null, TimeSpan.FromSeconds(2), TimeSpan.Zero);
+        }
     }
     
 
@@ -167,6 +172,24 @@ public class TournamentController : MonoBehaviour {
         lock (executionQueue) {
             executionQueue.Enqueue(action);
         }
+    }
+
+
+    private void checkAllReady(object? _) {
+        enqueue(() => {
+            foreach (var team in teams) {
+                if (!team.ready) {
+                    int team_id = team.playerId();
+                    Debug.Log($"checkAllReady(): team {team_id} not ready");
+                    GameUIManager gameui = GameObject.Find("GameManager").GetComponent<GameUIManager>();
+                    Debug.Log($"checkAllReady(): gameui = {gameui}");
+                    if (gameui != null) {
+                        string er = $"Player '{teamNames[team_id].name}': {teams[team_id].errorDescription}";
+                        gameui.GameOver(er);
+                    }
+                }
+            }
+        });
     }
 
     private bool isATeamMember(int team_id, int unit_id) {
