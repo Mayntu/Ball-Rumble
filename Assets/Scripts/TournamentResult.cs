@@ -8,6 +8,7 @@ public class TournamentResult
 {
     public TeamResult[] teams;
     public int winnerId = -1;
+    public string video = "";
 
     public TournamentResult(TournamentPlayer[] players) {
         teams = new TeamResult[players.Length];
