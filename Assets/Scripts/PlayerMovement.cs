@@ -202,6 +202,7 @@ public class PlayerMovement : MonoBehaviour
         canMove = false;
         isFallen = true;
         rb.mass += 100;
+        gameObject.GetComponent<BoxCollider>();
         yield return new WaitForSeconds(seconds);
         rb.mass -= 100;
         canMove = true;

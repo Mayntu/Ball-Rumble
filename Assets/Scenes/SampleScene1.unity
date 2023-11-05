@@ -4729,7 +4729,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 671772475}
   errorTextObject: {fileID: 664805360}
-  startTime: 15
+  startTime: 120
   pausePanel: {fileID: 1289464427}
   tc: {fileID: 0}
   vd: {fileID: 1897306746}

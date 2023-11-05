@@ -144,6 +144,8 @@ public class CatchBall : MonoBehaviour
         if (other.CompareTag("Ball"))
         {
             isCatched = true;
+            // GameObject[]
+            // foreach(players)
         }
     }
 

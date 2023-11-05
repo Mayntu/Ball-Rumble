@@ -40,8 +40,11 @@ public class VideoRecorder : MonoBehaviour
 
         m_Settings.EncoderSettings = new CoreEncoderSettings
         {
-            EncodingQuality = CoreEncoderSettings.VideoEncodingQuality.High,
+            // EncodingQuality = CoreEncoderSettings.VideoEncodingQuality.Hight,
+            EncodingQuality = CoreEncoderSettings.VideoEncodingQuality.Medium,
+            // EncodingProfile = CoreEncoderSettings.H264EncodingProfile.Baseline,
             Codec = CoreEncoderSettings.OutputCodec.MP4
+            // Codec = CoreEncoderSettings.OutputCodec.WEBM - мега качество
         };
         m_Settings.CaptureAlpha = true;
 
