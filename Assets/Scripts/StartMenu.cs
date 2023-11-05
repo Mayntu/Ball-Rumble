@@ -18,6 +18,7 @@ public class StartMenu : MonoBehaviour
     [SerializeField] private TMP_Text rightPlayerNick, rightPlayerPort;
     
     [SerializeField] private GameObject tc;
+    [SerializeField] private GameObject vd;
 
     private bool isPortSetted = false;
 
@@ -71,6 +72,7 @@ public class StartMenu : MonoBehaviour
         if (tc.GetComponent<TournamentController>().isPlayerReady(0) && tc.GetComponent<TournamentController>().isPlayerReady(1))
         {
             ResumeGame();
+            vd.GetComponent<VideoRecorder>().StartVideoCapture();
         }
     }
     public void PauseGame()

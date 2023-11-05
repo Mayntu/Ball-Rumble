@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -5,10 +7,13 @@ using TMPro;
 public class GameUIManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text timerText;
+    [SerializeField] private TMP_Text errorTextObject;
+    
     [SerializeField] private float startTime;
+    
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject tc;
-    [SerializeField] private TMP_Text errorTextObject;
+    [SerializeField] private GameObject vd;
 
     private float currentTime;
 
@@ -65,8 +70,13 @@ public class GameUIManager : MonoBehaviour
         tc = GameObject.Find("Tournament");
         tc.GetComponent<TournamentController>().onGameOver();
         pausePanel.SetActive(true);
-        Time.timeScale = 0f;
         errorTextObject.text = errorText;
-        // stop video recording with 1 seconds
+        StartCoroutine(DoStopGame());
+    }
+    IEnumerator DoStopGame()
+    {
+        yield return new WaitForSeconds(1f);
+        vd.GetComponent<VideoRecorder>().StopVideoCapture();
+        Time.timeScale = 0f;
     }
 }

@@ -10,16 +10,16 @@ using UnityEditor.Recorder.Input;
 
 public class VideoRecorder : MonoBehaviour
 {
+    [SerializeField] private string fileExtension;
     RecorderController m_RecorderController;
     public bool m_RecordAudio = true;
     internal MovieRecorderSettings m_Settings = null;
+    private string filePath;
     
     private void Start()
     {
         m_Settings = ScriptableObject.CreateInstance<MovieRecorderSettings>();
-        var fileName = m_Settings.OutputFile + ".mp4";
-        Initialize();
-        StartCoroutine(StopVideo());
+        var fileName = m_Settings.OutputFile + fileExtension;
     }
 
     private void Update()
@@ -35,7 +35,7 @@ public class VideoRecorder : MonoBehaviour
         var mediaOutputFolder = new DirectoryInfo(Path.Combine(Application.dataPath, "..", "SampleRecordings"));
 
         m_Settings = ScriptableObject.CreateInstance<MovieRecorderSettings>();
-        m_Settings.name = "My Video Recorder";
+        m_Settings.name = "VideoRecorder";
         m_Settings.Enabled = true;
 
         m_Settings.EncoderSettings = new CoreEncoderSettings
@@ -64,18 +64,23 @@ public class VideoRecorder : MonoBehaviour
         m_RecorderController.StartRecording();
 
         Debug.Log("Started recording for file" +  mediaOutputFolder.FullName);
+        filePath = m_Settings.OutputFile + fileExtension;
     }
 
+    public void StartVideoCapture()
+    {
+        Initialize();
+        GetFilePath();
+    }
+    
     public void StopVideoCapture()
     {
         m_RecorderController.StopRecording();
     }
 
-    // Метод для получения пути к файлу
-    IEnumerator StopVideo()
+    public string GetFilePath()
     {
-        Debug.Log("stopped");
-        yield return new WaitForSeconds(5f);
-        m_RecorderController.StopRecording();
+        Debug.Log(filePath);
+        return filePath;
     }
 }
