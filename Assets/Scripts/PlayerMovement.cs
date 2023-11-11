@@ -100,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded)
         {
             Vector3 moveDirection = new Vector3(horizontalInput, 0, verticalInput).normalized;
-            Vector3 moveVelocity = moveDirection * (unitAction.force > 700 && stamina > 0 ? sprintSpeed : movementSpeed);
+            Vector3 moveVelocity = moveDirection * (unitAction.force > 70 && stamina > 0 ? sprintSpeed : movementSpeed);
 
             rb.velocity = new Vector3(moveVelocity.x, rb.velocity.y, moveVelocity.z);
         }
@@ -123,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Sprint()
     {
-        if (unitAction.type == UnitAction.Types.RUN && unitAction.force > 700 && stamina > 0)
+        if (unitAction.type == UnitAction.Types.RUN && unitAction.force > 70 && stamina > 0)
         {
             timeSinceSprint = 0;
             canHeal = false;

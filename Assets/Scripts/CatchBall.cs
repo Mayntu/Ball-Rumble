@@ -22,6 +22,7 @@ public class CatchBall : MonoBehaviour
     private Animator animator;
     private Rigidbody ballRigidbody;
     private float previousRotationAngle;
+    private float forceFactor = 10;
 
     private UnitAction unitAction;
     private void Start()
@@ -155,7 +156,7 @@ public class CatchBall : MonoBehaviour
         ball.transform.SetParent(null);
         ballRigidbody.isKinematic = false;
         
-        throwForce = unitAction.force;
+        throwForce = unitAction.force * forceFactor;
         throwAngle = (float)unitAction.verticalAngle;
         throwAngle += gameObject.GetComponent<PlayerMovement>().ThrowAngleRange();
         Debug.Log(throwAngle);
@@ -170,7 +171,7 @@ public class CatchBall : MonoBehaviour
         ball.transform.SetParent(null);
         ballRigidbody.isKinematic = false;
         
-        kickForce = unitAction.force;
+        kickForce = unitAction.force * forceFactor;
         kickAngle = (float)unitAction.verticalAngle;
         kickAngle += gameObject.GetComponent<PlayerMovement>().KickAngleRange();
         Debug.Log(kickAngle);

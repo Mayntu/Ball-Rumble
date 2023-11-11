@@ -20,7 +20,7 @@ public class UnitAction : MonoBehaviour {
 
     public void set(Types actionType, uint actionForce, double relativeDirection = 0, double verticalAngle = 0) {
         type = actionType;
-        force = (actionForce <= 1000) ? actionForce : 1000;
+        force = (actionForce <= 100) ? actionForce : 100;
         direction = relativeDirection;
         this.verticalAngle = verticalAngle;
     }

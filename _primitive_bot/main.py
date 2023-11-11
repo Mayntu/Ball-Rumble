@@ -15,9 +15,9 @@ def main_logic(team_name, game_objects):
 
 	for u in my_team:
 		if "ball" in u['features']:
-			act = {'id': u['id'], 'type': 'run', 'force': 1000, 'direction': 0, 'angle': 0}
+			act = {'id': u['id'], 'type': 'run', 'force': 100, 'direction': 0, 'angle': 0}
 		else:
-			act = {'id': u['id'], 'type': 'run', 'force': 500, 'direction': hlp.direction(u['position'], ball['position']), 'angle': 0}
+			act = {'id': u['id'], 'type': 'run', 'force': 50, 'direction': hlp.direction(u['position'], ball['position']), 'angle': 0}
 		actions.append(act)
 
 	return actions 	# возвращаем список действий своих юнитов
