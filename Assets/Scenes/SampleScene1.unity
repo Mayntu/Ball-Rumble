@@ -5182,6 +5182,7 @@ GameObject:
   - component: {fileID: 1161707497}
   - component: {fileID: 1161707501}
   - component: {fileID: 1161707502}
+  - component: {fileID: 1161707503}
   m_Layer: 0
   m_Name: RegbyBall
   m_TagString: Ball
@@ -5365,6 +5366,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1019375094}
+--- !u!114 &1161707503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161707491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20a2630a77f3c834f8c7cc797dc533e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canCatch: 1
 --- !u!1 &1176421638
 GameObject:
   m_ObjectHideFlags: 0

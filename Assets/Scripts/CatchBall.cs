@@ -142,11 +142,20 @@ public class CatchBall : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.CompareTag("Ball"))
+        if (other.CompareTag("Ball") && ball.GetComponent<Ball>().canCatch && gameObject.GetComponent<PlayerMovement>().canMove)
         {
-            isCatched = true;
-            // GameObject[]
-            // foreach(players)
+            GameObject[] redPlayers = GameObject.FindGameObjectsWithTag("RedPlayer");
+            GameObject[] bluePlayers = GameObject.FindGameObjectsWithTag("BluePlayer");
+            foreach(GameObject redPlayer in redPlayers)
+            {
+                redPlayer.GetComponent<CatchBall>().isCatched = false;
+                gameObject.GetComponent<CatchBall>().isCatched = true;
+            }
+            foreach(GameObject bluePlayer in bluePlayers)
+            {
+                bluePlayer.GetComponent<CatchBall>().isCatched = false;
+                gameObject.GetComponent<CatchBall>().isCatched = true;
+            }
         }
     }
 
@@ -222,22 +231,25 @@ public class CatchBall : MonoBehaviour
     //     // }
     //     ball.transform.position = Vector3.zero;
     // }
-    private void OnCollisionEnter(Collision col)
+    private void OnCollisionStay(Collision col)
     {
         if (col.gameObject.tag == "BluePlayer" && gameObject.tag == "RedPlayer" && isCatched)
         {
+            Debug.Log("Red Player knocked");
             animator.Play("Knocked");
             isCatched = false;
-            ball.GetComponent<Rigidbody>().AddForce(new Vector3(0f, 5f, 0f), ForceMode.Force);
+            DropBall();
+            StartCoroutine(ball.GetComponent<Ball>().DoCanCatchFalse(1f));
             StartCoroutine(gameObject.GetComponent<PlayerMovement>().DoPlayerFall(2.5f));
         }
         if (col.gameObject.tag == "RedPlayer" && gameObject.tag == "BluePlayer" && isCatched)
         {
+            Debug.Log("Blue Player knocked");
             animator.Play("Knocked");
             isCatched = false;
-            ball.GetComponent<Rigidbody>().AddForce(new Vector3(0f, 5f, 0f), ForceMode.Force);
+            DropBall();
+            StartCoroutine(ball.GetComponent<Ball>().DoCanCatchFalse(1f));
             StartCoroutine(gameObject.GetComponent<PlayerMovement>().DoPlayerFall(2.5f));
         }
     }
-    
 }
