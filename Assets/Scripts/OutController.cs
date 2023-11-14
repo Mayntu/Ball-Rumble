@@ -48,6 +48,17 @@ public class OutController : MonoBehaviour
     {
         if (other.CompareTag("Ball"))
         {
+            GameObject[] redPlayers = GameObject.FindGameObjectsWithTag("RedPlayer");
+            GameObject[] bluePlayers = GameObject.FindGameObjectsWithTag("BluePlayer");
+            foreach (GameObject redPlayer in redPlayers)
+            {
+                redPlayer.GetComponent<CatchBall>().DropBall();
+            }
+            foreach (GameObject bluePlayer in bluePlayers)
+            {
+                bluePlayer.GetComponent<CatchBall>().DropBall();
+            }
+
             OutEntry = other.gameObject.transform.position;
             OutEntry.y = 2;
 
