@@ -9,7 +9,7 @@ Unity Version: 2022.2.16f1
 <b>Build Settings</b>
 ![Build Settings](https://github.com/Mayntu/Ball-Rumble/assets/102485233/cf31a89e-6d52-4291-8980-02ef1267dff1)
 
-<b>Target Platform</b>
+<b>Target Platform(Windows)</b>
 ![Target Platform(Windows)](https://github.com/Mayntu/Ball-Rumble/assets/102485233/be1a0b8a-c899-4295-bc2c-0327de2e86f8)
 
 <b>Player Settings</b>
@@ -18,7 +18,7 @@ Unity Version: 2022.2.16f1
 <b>Other Settings</b>
 ![Other Settings](https://github.com/Mayntu/Ball-Rumble/assets/102485233/e9597c4a-bdff-43db-9917-a2294d5d68c2)
 
-<b>Scripting Backend</b>
+<b>Scripting Backend(Mono)</b>
 ![Scripting Backend(Mono)](https://github.com/Mayntu/Ball-Rumble/assets/102485233/1ec92358-48b7-4ad7-8437-67fcd54c62e0)
 
 <b>Build</b>
