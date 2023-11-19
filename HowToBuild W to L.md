@@ -14,7 +14,7 @@ Unity Version: 2022.2.16f1
 <b>Build Settings</b>
 ![Build Settings](https://github.com/Mayntu/Ball-Rumble/assets/102485233/cf31a89e-6d52-4291-8980-02ef1267dff1)
 
-<b>Target Platform(Windows)</b>
+<b>Target Platform(Linux)</b>
 ![Target Platform(Linux)](https://github.com/Mayntu/Ball-Rumble/assets/102485233/0e0f45db-8b8c-438e-a7d3-3bd021b5bbdc)
 
 <b>Player Settings</b>
