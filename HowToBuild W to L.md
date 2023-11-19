@@ -3,6 +3,9 @@
 
 Unity Version: 2022.2.16f1
 
+Нужно скачать дистрибутив для билда для линукс - Linux Build Support - https://unity.com/releases/editor/whats-new/2022.2.16#release-notes
+
+
 <b>File>>Build Settings>>Target Platform(Linux)>>Player Settings>>Other Settings>>Scripting Backend(Mono)>>Build</b>
 
 <b>File</b>
