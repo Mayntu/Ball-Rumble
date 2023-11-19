@@ -23,7 +23,7 @@ Unity Version: 2022.2.16f1
 <b>Other Settings</b>
 ![Other Settings](https://github.com/Mayntu/Ball-Rumble/assets/102485233/e9597c4a-bdff-43db-9917-a2294d5d68c2)
 
-<b>Scripting Backend(Mono)</b>
+<b>Scripting Backend(IL2CPP)</b>
 ![Scripting Backend(IL2CPP)](https://github.com/Mayntu/Ball-Rumble/assets/102485233/1337857c-a339-4e82-b32d-3ff5902b30e5)
 
 <b>Build</b>
