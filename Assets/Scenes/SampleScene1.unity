@@ -8723,8 +8723,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 277362e05766833438eb58d313e10a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileExtension: .mp4
-  m_RecordAudio: 1
+  videoWidth: 1280
+  videoHeight: 720
+  recordMicrophone: 1
 --- !u!4 &1897306748
 Transform:
   m_ObjectHideFlags: 0

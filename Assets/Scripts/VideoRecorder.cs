@@ -1,89 +1,95 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System.ComponentModel;
-using System.IO;
-using UnityEditor;
-using UnityEditor.Recorder;
-using UnityEditor.Recorder.Encoder;
-using UnityEditor.Recorder.Input;
+using UnityEngine.Rendering;
+using NatSuite.Recorders;
+using NatSuite.Recorders.Clocks;
+using NatSuite.Recorders.Inputs;
 
 public class VideoRecorder : MonoBehaviour
 {
-    [SerializeField] private string fileExtension;
-    RecorderController m_RecorderController;
-    public bool m_RecordAudio = true;
-    internal MovieRecorderSettings m_Settings = null;
-    private string filePath;
-    
+    private int w;
+    private int h;
+    private MP4Recorder videoRecorder;
+    private Coroutine recordVideoCoroutine;
+    private int frameSkip = 5;
+    private float recordingDuration = 60.0f;
+    private float captureFrameRate = 5.0f;
+    private int gpuReadbackInterval = 2;
+    private int frameCount;
+    private float nextCaptureTime;
+
     private void Start()
     {
-        m_Settings = ScriptableObject.CreateInstance<MovieRecorderSettings>();
-        var fileName = m_Settings.OutputFile + fileExtension;
+        w = Screen.width;
+        h = Screen.height;
+        StartRecording();
     }
 
-    private void Update()
+    private void OnDestroy()
     {
-        
+        StopRecording();
     }
 
-    private void Initialize()
+    private string recordingPath = "Assets/Recordings/myVideo.mp4";
+
+    public void StartRecording()
     {
-        var controllerSettings = ScriptableObject.CreateInstance<RecorderControllerSettings>();
-        m_RecorderController = new RecorderController(controllerSettings);
+        videoRecorder = new MP4Recorder(w, h, 30, 60, 1);
+        recordVideoCoroutine = StartCoroutine(Recording());
+        StartCoroutine(StopRecordingAfterDuration());
+    }
 
-        var mediaOutputFolder = new DirectoryInfo(Path.Combine(Application.dataPath, "..", "SampleRecordings"));
+    public async void StopRecording()
+    {
+        StopCoroutine(recordVideoCoroutine);
+        var recordingPath = await videoRecorder.FinishWriting();
 
-        m_Settings = ScriptableObject.CreateInstance<MovieRecorderSettings>();
-        m_Settings.name = "VideoRecorder";
-        m_Settings.Enabled = true;
+        Debug.Log($"Recording saved to: {recordingPath}");
 
-        m_Settings.EncoderSettings = new CoreEncoderSettings
+        #if !UNITY_STANDALONE
+        Handheld.PlayFullScreenMovie($"file://{recordingPath}");
+        #endif
+    }
+
+
+    private IEnumerator Recording()
+    {
+        var clock = new RealtimeClock();
+
+        yield return new WaitForSeconds(1.0f);
+
+        while (true)
         {
-            // EncodingQuality = CoreEncoderSettings.VideoEncodingQuality.Hight,
-            EncodingQuality = CoreEncoderSettings.VideoEncodingQuality.Medium,
-            // EncodingProfile = CoreEncoderSettings.H264EncodingProfile.Baseline,
-            Codec = CoreEncoderSettings.OutputCodec.MP4
-            // Codec = CoreEncoderSettings.OutputCodec.WEBM - мега качество
-        };
-        m_Settings.CaptureAlpha = true;
+            float currentTime = Time.time;
 
-        m_Settings.ImageInputSettings = new GameViewInputSettings
-        {
-            OutputWidth = 1920,
-            OutputHeight = 1080
-        };
+            yield return new WaitForEndOfFrame();
 
-        // Simple file name (no wildcards) so that FileInfo constructor works in OutputFile getter.
-        m_Settings.OutputFile = mediaOutputFolder.FullName + "/" + "video";
+            if (currentTime < nextCaptureTime)
+                continue;
 
-        // Setup Recording
-        controllerSettings.AddRecorderSettings(m_Settings);
-        controllerSettings.SetRecordModeToManual();
-        controllerSettings.FrameRate = 60.0f;
+            if (Time.frameCount % frameSkip != 0)
+                continue;
 
-        RecorderOptions.VerboseMode = false;
-        m_RecorderController.PrepareRecording();
-        m_RecorderController.StartRecording();
+            frameCount++;
 
-        Debug.Log("Started recording for file" +  mediaOutputFolder.FullName);
-        filePath = m_Settings.OutputFile + fileExtension;
+            if (frameCount % gpuReadbackInterval == 0)
+            {
+                RenderTexture renderTexture = new RenderTexture(w, h, 24);
+                yield return new WaitForEndOfFrame();
+                Graphics.Blit(null, renderTexture);
+                AsyncGPUReadbackRequest request = AsyncGPUReadback.Request(renderTexture);
+                yield return new WaitUntil(() => request.done);
+
+                videoRecorder.CommitFrame(request.GetData<Color32>().ToArray(), clock.timestamp);
+            }
+
+            nextCaptureTime = currentTime + 1f / captureFrameRate;
+        }
     }
 
-    public void StartVideoCapture()
+    private IEnumerator StopRecordingAfterDuration()
     {
-        Initialize();
-        GetFilePath();
-    }
-    
-    public void StopVideoCapture()
-    {
-        m_RecorderController.StopRecording();
-    }
-
-    public string GetFilePath()
-    {
-        Debug.Log(filePath);
-        return filePath;
+        yield return new WaitForSeconds(recordingDuration);
+        StopRecording();
     }
 }

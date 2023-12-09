@@ -103,7 +103,7 @@ public class TournamentController : MonoBehaviour {
             player.requestGameOver();
         }
         VideoRecorder vr = GameObject.Find("VideoRecorder").GetComponent<VideoRecorder>();
-        if (vr != null) result.video = vr.GetFilePath();
+        // if (vr != null) result.video = vr.GetFilePath();
         cli.echo($"RESULTS: {result.toJson()}");
         if (isServerSide()) {
             quitTimer = new(quitTimerHandler, null, TimeSpan.FromSeconds(2), TimeSpan.Zero);

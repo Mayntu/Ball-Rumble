@@ -76,7 +76,7 @@ public class GameUIManager : MonoBehaviour
     IEnumerator DoStopGame()
     {
         yield return new WaitForSeconds(1f);
-        vd.GetComponent<VideoRecorder>().StopVideoCapture();
+        // vd.GetComponent<VideoRecorder>().StopVideoCapture();
         Time.timeScale = 0f;
     }
 }

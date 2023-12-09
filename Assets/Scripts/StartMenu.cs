@@ -72,7 +72,7 @@ public class StartMenu : MonoBehaviour
         if (tc.GetComponent<TournamentController>().isPlayerReady(0) && tc.GetComponent<TournamentController>().isPlayerReady(1))
         {
             ResumeGame();
-            vd.GetComponent<VideoRecorder>().StartVideoCapture();
+            // vd.GetComponent<VideoRecorder>().StartVideoCapture();
         }
     }
     public void PauseGame()
