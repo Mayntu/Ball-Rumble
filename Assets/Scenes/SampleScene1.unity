@@ -4975,7 +4975,7 @@ GameObject:
   - component: {fileID: 1096754239}
   m_Layer: 0
   m_Name: Tournament
-  m_TagString: Untagged
+  m_TagString: Tournament
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8019,6 +8019,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114448085028176216, guid: 8fa59c0c9387c3d428a0a4989b7d1cb3, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114708477723034198, guid: 8fa59c0c9387c3d428a0a4989b7d1cb3, type: 3}
+      propertyPath: gpuEncoding
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

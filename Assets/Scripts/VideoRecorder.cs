@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using Evereal.VideoCapture;
+using Evereal.VideoCapture;
 
 public class VideoRecorder : MonoBehaviour
 {
@@ -19,9 +20,10 @@ public class VideoRecorder : MonoBehaviour
     {
         vc.GetComponent<VideoCapture>().StopCapture();
     }
-
-    public string GetFilePath()
-    {
-        return Application.dataPath + "/Captures";
+    
+    public string GetFilePath() 
+    { 
+        Debug.Log(VideoCache.lastVideoFile); 
+        return VideoCache.lastVideoFile; 
     }
 }

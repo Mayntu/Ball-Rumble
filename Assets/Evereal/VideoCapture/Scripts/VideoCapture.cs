@@ -390,13 +390,14 @@ namespace Evereal.VideoCapture
       lastVideoFile = savePath;
 
       Debug.LogFormat(LOG_FORMAT, "Video generated success!");
+      Debug.Log(GetFilePath());
+    }
+    public string GetFilePath()
+    {
+      return lastVideoFile;
     }
 
     #endregion
-    public string GetFilePath()
-    {
-      return filePath;
-    }
 
     #region Internal
 
