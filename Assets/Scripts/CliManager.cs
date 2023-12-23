@@ -7,7 +7,6 @@ using UnityEngine;
 public class CliManager {
     private List<string> teams = new List<string>();
     public CliManager() {
-        //test();
         var args = System.Environment.GetCommandLineArgs();
         for (int i = 0; i < args.Length-1; i++) {
             if (args[i] == "--player") {
@@ -15,6 +14,8 @@ public class CliManager {
                 Debug.Log($"GameArguments:: got team cfg: {args[i]}");
             }
         }
+        // Uncomment to test game server side logic
+        // test();
     }
 
 
@@ -45,7 +46,6 @@ public class CliManager {
         string t1 = getTeamConfigById(1);
         Debug.Log($"Gonfigured team0: {t0}");
         Debug.Log($"Gonfigured team1: {t1}");
-        teams.Clear();
     }
 
 }

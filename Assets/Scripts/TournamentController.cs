@@ -113,6 +113,7 @@ public class TournamentController : MonoBehaviour {
 
     public bool isServerSide() {
         bool r = updatedByCli && cli.teamsConfigured() >= totalTeams;
+        //Debug.Log($"isServerSide() called, updatedByCli={updatedByCli}, teamsConfigured={cli.teamsConfigured()}");
         if (r) cli.echo("RUNNING ON SERVER SIDE");
         return r;
     }
