@@ -23,7 +23,7 @@ public class VideoRecorder : MonoBehaviour
     
     public string GetFilePath() 
     { 
-        Debug.Log(VideoCache.lastVideoFile); 
+        Debug.Log(VideoCache.lastVideoFile);
         return VideoCache.lastVideoFile; 
     }
 }

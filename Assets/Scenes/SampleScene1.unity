@@ -4730,7 +4730,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 671772475}
   errorTextObject: {fileID: 664805360}
-  startTime: 15
+  startTime: 120
   pausePanel: {fileID: 1289464427}
   tc: {fileID: 0}
   vd: {fileID: 1897306746}
@@ -8023,6 +8023,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114708477723034198, guid: 8fa59c0c9387c3d428a0a4989b7d1cb3, type: 3}
       propertyPath: gpuEncoding
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114708477723034198, guid: 8fa59c0c9387c3d428a0a4989b7d1cb3, type: 3}
+      propertyPath: captureSource
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

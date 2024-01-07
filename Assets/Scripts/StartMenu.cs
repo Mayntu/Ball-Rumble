@@ -27,12 +27,8 @@ public class StartMenu : MonoBehaviour
         bluePlayers = GameObject.FindGameObjectsWithTag("BluePlayer");
         redPlayers = GameObject.FindGameObjectsWithTag("RedPlayer");
         PauseGame();
-        if (tc.GetComponent<TournamentController>().isServerSide())
-        {
-            startServerButton.SetActive(false);
-            StartGame();
-            // Начать запись видео
-        }
+        Debug.Log("tc" + tc.GetComponent<TournamentController>().isServerSide());
+        StartCoroutine(DoCheckIsServerSide());
         leftPlayerNick.text = tc.GetComponent<TournamentController>().getPlayerName(0);
         rightPlayerNick.text = tc.GetComponent<TournamentController>().getPlayerName(1);
 
@@ -65,6 +61,20 @@ public class StartMenu : MonoBehaviour
             {
                 return;
             }
+        }
+    }
+    private IEnumerator DoCheckIsServerSide()
+    {
+        yield return new WaitForSeconds(0.2f);
+        if (tc.GetComponent<TournamentController>().isServerSide())
+        {
+            startServerButton.SetActive(false);
+            StartGame();
+            // Начать запись видео
+        }
+        else
+        {
+            startServerButton.SetActive(true);
         }
     }
     public void StartGame()
