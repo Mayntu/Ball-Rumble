@@ -29,8 +29,6 @@ public class StartMenu : MonoBehaviour
         PauseGame();
         Debug.Log("tc" + tc.GetComponent<TournamentController>().isServerSide());
         StartCoroutine(DoCheckIsServerSide());
-        leftPlayerNick.text = tc.GetComponent<TournamentController>().getPlayerName(0);
-        rightPlayerNick.text = tc.GetComponent<TournamentController>().getPlayerName(1);
 
         
     }
@@ -53,6 +51,8 @@ public class StartMenu : MonoBehaviour
         {
             try
             {
+                leftPlayerNick.text = tc.GetComponent<TournamentController>().getPlayerName(0);
+                rightPlayerNick.text = tc.GetComponent<TournamentController>().getPlayerName(1);
                 leftPlayerPort.text = tc.GetComponent<TournamentController>().getPlayerPort(0).ToString();
                 rightPlayerPort.text = tc.GetComponent<TournamentController>().getPlayerPort(1).ToString();
                 isPortSetted = true;

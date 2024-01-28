@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using SerializableAttribute = System.SerializableAttribute;
 using System.IO;
 
 public class TeamSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject uniquePlayerPrefab;
+    [SerializeField] private GameObject tc;
 
     [SerializeField] private Transform[] redTeamSpawnPoints;
     [SerializeField] private Transform[] blueTeamSpawnPoints;
@@ -22,6 +24,11 @@ public class TeamSpawner : MonoBehaviour
 
     [SerializeField] private GameObject redTrigger;
     [SerializeField] private GameObject blueTrigger;
+
+    
+    [SerializeField] private TMP_Text redPlayerName;
+    [SerializeField] private TMP_Text bluePlayerName;
+
 
     private GameObject[] redTeam;
     private GameObject[] blueTeam;
@@ -151,6 +158,7 @@ public class TeamSpawner : MonoBehaviour
 
         infoToLog += "Tag: " + playerPrefab.tag + " | ";
 
+        StartCoroutine(DoSetNames());
         playerPrefab.GetComponentInChildren<PlayerType>().ResetColor();
         if(randomInt == 1) { playerPrefab.GetComponentInChildren<PlayerType>().isRed = true; SetImageEnabled(redTeamPanels, "Red", true); }
         else if(randomInt == 2) { playerPrefab.GetComponentInChildren<PlayerType>().isBlue = true; SetImageEnabled(redTeamPanels, "Blue", true); }
@@ -178,6 +186,7 @@ public class TeamSpawner : MonoBehaviour
 
         infoToLog += "Tag: " + playerPrefab.tag + " | ";
 
+
         playerPrefab.GetComponentInChildren<PlayerType>().ResetColor();
         if(randomInt == 1) { playerPrefab.GetComponentInChildren<PlayerType>().isRed = true; SetImageEnabled(blueTeamPanels, "Red", true); }
         else if(randomInt == 2) { playerPrefab.GetComponentInChildren<PlayerType>().isBlue = true; SetImageEnabled(blueTeamPanels, "Blue", true); }
@@ -187,7 +196,7 @@ public class TeamSpawner : MonoBehaviour
         else if(randomInt == 6) { playerPrefab.GetComponentInChildren<PlayerType>().isBlack = true; SetImageEnabled(blueTeamPanels, "Black", true); }
         else if(randomInt == 7) { playerPrefab.GetComponentInChildren<PlayerType>().isWhite = true; SetImageEnabled(blueTeamPanels, "White", true); }
         else if(randomInt == 8) { playerPrefab.GetComponentInChildren<PlayerType>().isPink = true; SetImageEnabled(blueTeamPanels, "Pink", true); }
-
+        
         foreach(Transform spawnPoint in blueTeamSpawnPoints)
         {
             Instantiate(playerPrefab, spawnPoint.position, Quaternion.identity);
@@ -201,6 +210,13 @@ public class TeamSpawner : MonoBehaviour
     public void RespawnTeams()
     {
         StartCoroutine(DoGoal());
+    }
+    private IEnumerator DoSetNames()
+    {
+        yield return new WaitForSeconds(0.01f);
+        TournamentController tcScript = tc.GetComponent<TournamentController>();
+        redPlayerName.text = tc.GetComponent<TournamentController>().getPlayerName(0);
+        bluePlayerName.text = tc.GetComponent<TournamentController>().getPlayerName(1);
     }
     IEnumerator DoGoal()
     {
