@@ -258,6 +258,7 @@ public class TournamentController : MonoBehaviour {
             int playerPort = 8201 + i;
             TeamInfo client = new(i, playerTag, playerName, playerHost, playerPort);
             updatedByCli |= client.update(cli.getTeamConfigById(i));
+            teamNames[i].name = client.name;
             teams[i] = new TournamentPlayer(client);
             unitsInTeam = (uint) GameObject.FindGameObjectsWithTag(playerTag).Length;
         }
