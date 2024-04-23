@@ -25,6 +25,7 @@ public class TeamInfo {
         catch { 
             return false;
         }
+        Debug.Log($"Team {id} updated: tag {tag}, name {name}, host {host}, port {port}");
         return true;
     }
 }

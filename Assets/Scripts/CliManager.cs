@@ -16,6 +16,7 @@ public class CliManager {
         }
         // Uncomment to test game server side logic
         // test();
+        echo("Starting...");
     }
 
 
